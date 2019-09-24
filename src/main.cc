@@ -20,10 +20,12 @@ void testRun(int n, float* x, float* y, int* layer, float* weight, float dc, flo
 }
 
 int main(void) {
+  
 
   //////////////////////////////
   // read toy data from csv file
   //////////////////////////////
+  std::cout << "Start Loading input points" << std::endl;
   std::vector<float> x;
   std::vector<float> y;
   std::vector<int> layer;
@@ -43,8 +45,11 @@ int main(void) {
   //////////////////////////////
   // test run
   //////////////////////////////
+  std::cout << "Start Running CLUE" << std::endl;
   float dc=5.0, d0=10, rhoc=2;
-  bool useGPU=false, verbose=false;
+  bool useGPU=false, verbose=true;
   testRun(x.size(), &x[0],&y[0],&layer[0],&weight[0], dc,d0,rhoc, useGPU,verbose);
+
+  
   return 0;
 }
