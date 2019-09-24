@@ -1,7 +1,10 @@
 # Standalone CLUE Algorithm on GPU and CPU
 
+Z.Chen[1], A. Di Pilato[2], F. Pantaleo[3], M. Rovere[3]
 
-## 1. Setup on Felk40 or Vinavx2
+*[1] Northwestern University, [2]University of Bari, [3] CERN*
+
+## 1. Setup on felk40 or vinavx2
 
 This needs `gcc version 7.4.1` and `CUDA_10_1 with driver V418`.
 Note that `gcc v4.8` is the defaul gcc version on Felk40 or Vinavx2, 
@@ -30,7 +33,7 @@ bin/x86_64/linux/release/vectorAdd
 
 
 
-Then setup this project. **fork this reop for developers**. In `CUDA_Sample_10_1`
+Then setup this project. **Fork this reop if developers**. In `CUDA_Sample_10_1`
 ```
 mkdir 8_MyProject
 cd 8_MyProject
@@ -39,8 +42,23 @@ cd CLUEAlgo
 make
 ```
 
+If the projects compiles without errors, you can go run CLUEAlgo by
+```
+bin/main [input.csv] [d_c] [d_0] [delta_c] [rho_c] [useCUDA]
+# useCUDA = 1 for GPU runs
+```
+If you meet any error when compiling or running this project, 
+contact us at zihengchen2015@u.northwestern.edu
 ## 2. Implementation
 
-Result of CPU and GPU are tested to identical
+<p align=center><img width="50%" src=https://github.com/ZihengChen/CLUEAlgo/blob/master/plots/implementations.png/></p> 
+Result of CPU and GPU are tested to identical.
+
+
 
 ## 3. Performance
+
+<p align=center><img width="60%" src=https://github.com/ZihengChen/CLUEAlgo/blob/master/plots/examples.png/></p> 
+
+<p align=center><img width="100%" src=https://github.com/ZihengChen/CLUEAlgo/blob/master/plots/executionTime.png/></p> 
+
