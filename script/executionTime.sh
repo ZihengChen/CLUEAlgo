@@ -1,0 +1,21 @@
+bin/main input_toyDetector_1000.csv 2.5 5 5 6 0
+bin/main input_toyDetector_2000.csv 2.5 5 5 6 0
+bin/main input_toyDetector_3000.csv 2.5 5 5 6 0
+bin/main input_toyDetector_4000.csv 2.5 5 5 6 0
+bin/main input_toyDetector_5000.csv 2.5 5 5 6 0
+bin/main input_toyDetector_6000.csv 2.5 5 5 6 0
+bin/main input_toyDetector_7000.csv 2.5 5 5 6 0
+bin/main input_toyDetector_8000.csv 2.5 5 5 6 0
+bin/main input_toyDetector_9000.csv 2.5 5 5 6 0
+bin/main input_toyDetector_10000.csv 2.5 5 5 6 0
+
+bin/main input_toyDetector_1000.csv 2.5 5 5 6 1
+bin/main input_toyDetector_2000.csv 2.5 5 5 6 1
+bin/main input_toyDetector_3000.csv 2.5 5 5 6 1
+bin/main input_toyDetector_4000.csv 2.5 5 5 6 1
+bin/main input_toyDetector_5000.csv 2.5 5 5 6 1
+bin/main input_toyDetector_6000.csv 2.5 5 5 6 1
+bin/main input_toyDetector_7000.csv 2.5 5 5 6 1
+bin/main input_toyDetector_8000.csv 2.5 5 5 6 1
+bin/main input_toyDetector_9000.csv 2.5 5 5 6 1
+bin/main input_toyDetector_10000.csv 2.5 5 5 6 1

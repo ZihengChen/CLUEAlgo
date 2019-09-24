@@ -16,16 +16,18 @@ class CLUEAlgo{
 
   public:
     // constructor
-    CLUEAlgo(float dc, float d0, float rhoc ){ 
+    CLUEAlgo(float dc, float d0, float deltac, float rhoc ){ 
       dc_ = dc; 
       d0_ = d0; 
+      deltac_ = deltac; 
       rhoc_ = rhoc;
+      
     }
     // distrcutor
     ~CLUEAlgo(){} 
     
     // public variables
-    float dc_, d0_, rhoc_;
+    float dc_, d0_, deltac_, rhoc_;
     Points points_; 
 
     // public methods
@@ -50,18 +52,21 @@ class CLUEAlgo{
 
     void makeClusters();
 
-    void verboseResults(int nVerbose = -1 ){
+    void verboseResults(int nVerbose = -1 ){ 
       
       if (nVerbose ==-1) nVerbose=points_.n;
 
+      std::cout << "index,x,y,layer,weight,rho,delta,nh,isSeed,clusterId"<< std::endl;
       for(int i = 0; i < nVerbose; i++) {
-        std::cout << i << ", ("<<points_.x[i]<< ","<<points_.y[i]<< "), rho="<<points_.rho[i];
+        std::cout << i << ","<<points_.x[i]<< ","<<points_.y[i]<< ","<<points_.layer[i] << ","<<points_.weight[i];
+        std::cout << "," << points_.rho[i];
         if (points_.delta[i] < 999)
-          std::cout << ", delta="<<points_.delta[i];
+          std::cout << ","<<points_.delta[i];
         else
-          std::cout << ", delta=+inf";
-        std::cout << ", nh="<<points_.nearestHigher[i];
-        std::cout << ", clID="<<points_.clusterIndex[i];
+          std::cout << ",500";
+        std::cout << ","<<points_.nearestHigher[i];
+        std::cout << "," << points_.isSeed[i];
+        std::cout << ","<<points_.clusterIndex[i];
         std::cout << std::endl;
       }
     }
@@ -77,7 +82,6 @@ class CLUEAlgo{
     void calculateLocalDensity(std::array<LayerTiles, NLAYERS> & );
     void calculateDistanceToHigher(std::array<LayerTiles, NLAYERS> & );
     void findAndAssignClusters();
-      
     inline float distance(int , int) const ;
 };
 

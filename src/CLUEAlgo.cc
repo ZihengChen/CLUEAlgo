@@ -42,7 +42,7 @@ void CLUEAlgo::calculateLocalDensity( std::array<LayerTiles, NLAYERS> & allLayer
           int j = lt[binId][binIter];
           // query N_{dc_}(i)
           float dist_ij = distance(i, j);
-          if(dist_ij < dc_) {
+          if(dist_ij <= dc_) {
             // sum weights within N_{dc_}(i)
             points_.rho[i] += points_.weight[j];
           }
@@ -79,13 +79,13 @@ void CLUEAlgo::calculateDistanceToHigher( std::array<LayerTiles, NLAYERS> & allL
         // interate inside this bin
         for (int binIter = 0; binIter < binSize; binIter++) {
           int j = lt[binId][binIter];
-          // query N'_{dc_}(i)
+          // query N'_{d0_}(i)
           bool foundHigher = (points_.rho[j] > points_.rho[i]);
           // in the rare case where rho is the same, use detid
           foundHigher = foundHigher || ((points_.rho[j] == points_.rho[i]) && (j>i) );
           float dist_ij = distance(i, j);
-          if(foundHigher && dist_ij < d0_) { // definition of N'_{dc_}(i)
-            // find the nearest point within N'_{dc_}(i)
+          if(foundHigher && dist_ij <= d0_) { // definition of N'_{d0_}(i)
+            // find the nearest point within N'_{d0_}(i)
             if (dist_ij < delta_i) {
               // update delta_i and nearestHigher_i
               delta_i = dist_ij;
@@ -112,7 +112,7 @@ void CLUEAlgo::findAndAssignClusters(){
     // initialize clusterIndex
     points_.clusterIndex[i] = -1;
     // determine seed or outlier
-    bool isSeed = (points_.delta[i] > dc_) && (points_.rho[i] >= rhoc_);
+    bool isSeed = (points_.delta[i] > deltac_) && (points_.rho[i] >= rhoc_);
     bool isOutlier = (points_.delta[i] > d0_) && (points_.rho[i] < rhoc_);
     if (isSeed) {
       // set isSeed as 1

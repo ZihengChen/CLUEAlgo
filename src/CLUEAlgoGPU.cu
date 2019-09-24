@@ -58,7 +58,7 @@ __global__ void kernel_compute_density( LayerTilesGPU *d_hist,
           float xj = d_points.x[j];
           float yj = d_points.y[j];
           float dist_ij = std::sqrt((xi-xj)*(xi-xj) + (yi-yj)*(yi-yj));
-          if(dist_ij < dc) { 
+          if(dist_ij <= dc) { 
             // sum weights within N_{dc_}(i)
             rhoi += d_points.weight[j];              
           }
@@ -108,7 +108,7 @@ __global__ void kernel_compute_distanceToHigher(LayerTilesGPU* d_hist,
           bool foundHigher = (d_points.rho[j] > rhoi);
           // in the rare case where rho is the same, use detid
           foundHigher = foundHigher || ( (d_points.rho[j] == rhoi) && (j>i));
-          if(foundHigher && dist_ij < d0) { // definition of N'_{dc_}(i)
+          if(foundHigher && dist_ij <= d0) { // definition of N'_{dc_}(i)
             // find the nearest point within N'_{dc_}(i)
             if (dist_ij<deltai) {
               // update deltai and nearestHigheri
@@ -129,7 +129,7 @@ __global__ void kernel_compute_distanceToHigher(LayerTilesGPU* d_hist,
 __global__ void kernel_find_clusters( GPU::VecArray<int,maxNSeeds>* d_seeds,
                                       GPU::VecArray<int,maxNFollowers>* d_followers,
                                       PointsPtr d_points,
-                                      float dc, float d0, float rhoc,
+                                      float deltac, float d0, float rhoc,
                                       int numberOfPoints
                                       ) 
 {
@@ -141,7 +141,7 @@ __global__ void kernel_find_clusters( GPU::VecArray<int,maxNSeeds>* d_seeds,
     // determine seed or outlier
     float deltai = d_points.delta[i];
     float rhoi = d_points.rho[i];
-    bool isSeed = (deltai > dc) && (rhoi >= rhoc);
+    bool isSeed = (deltai > deltac) && (rhoi >= rhoc);
     bool isOutlier = (deltai > d0) && (rhoi < rhoc);
 
     if (isSeed) {
@@ -221,7 +221,7 @@ void CLUEAlgoGPU::makeClusters( ) {
   kernel_compute_histogram <<<gridSize,blockSize>>>(d_hist, d_points, points_.n);
   kernel_compute_density <<<gridSize,blockSize>>>(d_hist, d_points, dc_, points_.n);
   kernel_compute_distanceToHigher <<<gridSize,blockSize>>>(d_hist, d_points, d0_, points_.n);
-  kernel_find_clusters <<<gridSize,blockSize>>>(d_seeds, d_followers, d_points, dc_,d0_,rhoc_, points_.n);  
+  kernel_find_clusters <<<gridSize,blockSize>>>(d_seeds, d_followers, d_points, deltac_,d0_,rhoc_, points_.n);  
   
   ////////////////////////////////////////////
   // assign clusters
