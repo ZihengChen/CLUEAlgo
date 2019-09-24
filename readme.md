@@ -57,8 +57,10 @@ Result of CPU and GPU are tested to identical.
 
 
 ## 3. Performance
+The clustering result of a few sythetic dataset is shown below
+<p align=center><img width="100%" src=https://github.com/ZihengChen/CLUEAlgo/blob/master/plots/examples.png/></p> 
 
-<p align=center><img width="60%" src=https://github.com/ZihengChen/CLUEAlgo/blob/master/plots/examples.png/></p> 
-
+We generate toy events on toy detector consist of 1 layer (left) or 100 layers (right). 
+The average execution time of toy events on CPU and GPU are shown below
 <p align=center><img width="100%" src=https://github.com/ZihengChen/CLUEAlgo/blob/master/plots/executionTime.png/></p> 
 
