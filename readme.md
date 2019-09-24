@@ -13,7 +13,7 @@ The only purpose of CMSSW here is to prove a correct version of gcc.
 If you already have `gcc version 7.4.1` ad default gcc, you can
 skip this step.
 
-```
+```bash
 # skip this if your defaut gcc is V7.4.1
 cmsrel CMSSW_11_0_X 
 cd CMSSW_11_0_X/src
@@ -24,7 +24,7 @@ cd ../..
 First build your standalone CUDA development workplace. 
 This should take a few minutes to compile.
 And test run of `vectorAdd` should be good.
-```
+```bash
 cp -r /usr/local/cuda-10.1/samples ./CUDA_Sample_10_1
 cd CUDA_Sample_10_1
 make -j
@@ -34,7 +34,7 @@ bin/x86_64/linux/release/vectorAdd
 
 
 Then setup this project. **Fork this reop if developers**. In `CUDA_Sample_10_1`
-```
+```bash
 mkdir 8_MyProject
 cd 8_MyProject
 git clone https://github.com/YOUR_FOLK/CLUEAlgo.git
@@ -43,7 +43,7 @@ make
 ```
 
 If the projects compiles without errors, you can go run CLUEAlgo by
-```
+```bash
 bin/main [input.csv] [d_c] [d_0] [delta_c] [rho_c] [useCUDA]
 # useCUDA = 1 for GPU runs
 ```
