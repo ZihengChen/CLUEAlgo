@@ -1,0 +1,342 @@
+running on CPU
+input file data/input/toyDetector_1000.csv
+output file data/output/toyDetector_1000_3_5_5_8.csv
+Start to load input points
+Finished loading input points
+Start to run CLUE algorithm
+Elapsed time: 221.87 ms
+Elapsed time: 214.393 ms
+Elapsed time: 218.503 ms
+Elapsed time: 223.438 ms
+Elapsed time: 222.389 ms
+Elapsed time: 222.863 ms
+Elapsed time: 216.009 ms
+Elapsed time: 215.443 ms
+Elapsed time: 214.958 ms
+Elapsed time: 217.411 ms
+Finished running CLUE algorithm
+
+input file data/input/toyDetector_2000.csv
+output file data/output/toyDetector_2000_3_5_5_8.csv
+Start to load input points
+Finished loading input points
+Start to run CLUE algorithm
+Elapsed time: 433.108 ms
+Elapsed time: 418.361 ms
+Elapsed time: 410.551 ms
+Elapsed time: 420.201 ms
+Elapsed time: 426.089 ms
+Elapsed time: 433.851 ms
+Elapsed time: 424.63 ms
+Elapsed time: 416.74 ms
+Elapsed time: 424.748 ms
+Elapsed time: 423.156 ms
+Finished running CLUE algorithm
+
+input file data/input/toyDetector_3000.csv
+output file data/output/toyDetector_3000_3_5_5_8.csv
+Start to load input points
+Finished loading input points
+Start to run CLUE algorithm
+Elapsed time: 615.542 ms
+Elapsed time: 618.246 ms
+Elapsed time: 602.742 ms
+Elapsed time: 609.33 ms
+Elapsed time: 623.61 ms
+Elapsed time: 606.411 ms
+Elapsed time: 619.432 ms
+Elapsed time: 608.613 ms
+Elapsed time: 599.133 ms
+Elapsed time: 623.058 ms
+Finished running CLUE algorithm
+
+input file data/input/toyDetector_4000.csv
+output file data/output/toyDetector_4000_3_5_5_8.csv
+Start to load input points
+Finished loading input points
+Start to run CLUE algorithm
+Elapsed time: 866.237 ms
+Elapsed time: 886.468 ms
+Elapsed time: 871.371 ms
+Elapsed time: 854.251 ms
+Elapsed time: 853.455 ms
+Elapsed time: 853.924 ms
+Elapsed time: 868.105 ms
+Elapsed time: 872.271 ms
+Elapsed time: 858 ms
+Elapsed time: 858.915 ms
+Finished running CLUE algorithm
+
+input file data/input/toyDetector_5000.csv
+output file data/output/toyDetector_5000_3_5_5_8.csv
+Start to load input points
+Finished loading input points
+Start to run CLUE algorithm
+Elapsed time: 1108.17 ms
+Elapsed time: 1111.74 ms
+Elapsed time: 1107.25 ms
+Elapsed time: 1071.64 ms
+Elapsed time: 1068.45 ms
+Elapsed time: 1081.89 ms
+Elapsed time: 1067.65 ms
+Elapsed time: 1072.55 ms
+Elapsed time: 1079.78 ms
+Elapsed time: 1064.8 ms
+Finished running CLUE algorithm
+
+input file data/input/toyDetector_6000.csv
+output file data/output/toyDetector_6000_3_5_5_8.csv
+Start to load input points
+Finished loading input points
+Start to run CLUE algorithm
+Elapsed time: 1289.59 ms
+Elapsed time: 1294.82 ms
+Elapsed time: 1295.26 ms
+Elapsed time: 1299.94 ms
+Elapsed time: 1278.03 ms
+Elapsed time: 1316.28 ms
+Elapsed time: 1309.86 ms
+Elapsed time: 1301.84 ms
+Elapsed time: 1286.64 ms
+Elapsed time: 1347.72 ms
+Finished running CLUE algorithm
+
+input file data/input/toyDetector_7000.csv
+output file data/output/toyDetector_7000_3_5_5_8.csv
+Start to load input points
+Finished loading input points
+Start to run CLUE algorithm
+Elapsed time: 1622.16 ms
+Elapsed time: 1581.88 ms
+Elapsed time: 1583.06 ms
+Elapsed time: 1574.33 ms
+Elapsed time: 1579.59 ms
+Elapsed time: 1593.63 ms
+Elapsed time: 1582.7 ms
+Elapsed time: 1579.68 ms
+Elapsed time: 1578.53 ms
+Elapsed time: 1580.86 ms
+Finished running CLUE algorithm
+
+input file data/input/toyDetector_8000.csv
+output file data/output/toyDetector_8000_3_5_5_8.csv
+Start to load input points
+Finished loading input points
+Start to run CLUE algorithm
+Elapsed time: 1876.59 ms
+Elapsed time: 1847.07 ms
+Elapsed time: 1856.12 ms
+Elapsed time: 1854.57 ms
+Elapsed time: 1841.36 ms
+Elapsed time: 1843.42 ms
+Elapsed time: 1845.81 ms
+Elapsed time: 1850.3 ms
+Elapsed time: 1849.66 ms
+Elapsed time: 1848.8 ms
+Finished running CLUE algorithm
+
+input file data/input/toyDetector_9000.csv
+output file data/output/toyDetector_9000_3_5_5_8.csv
+Start to load input points
+Finished loading input points
+Start to run CLUE algorithm
+Elapsed time: 2140.1 ms
+Elapsed time: 2115.52 ms
+Elapsed time: 2122.31 ms
+Elapsed time: 2125.58 ms
+Elapsed time: 2144.19 ms
+Elapsed time: 2113.84 ms
+Elapsed time: 2139.26 ms
+Elapsed time: 2113.55 ms
+Elapsed time: 2112.42 ms
+Elapsed time: 2122.22 ms
+Finished running CLUE algorithm
+
+input file data/input/toyDetector_10000.csv
+output file data/output/toyDetector_10000_3_5_5_8.csv
+Start to load input points
+Finished loading input points
+Start to run CLUE algorithm
+Elapsed time: 2365.21 ms
+Elapsed time: 2375.29 ms
+Elapsed time: 2372.05 ms
+Elapsed time: 2371.9 ms
+Elapsed time: 2372.18 ms
+Elapsed time: 2354 ms
+Elapsed time: 2372.17 ms
+Elapsed time: 2374.87 ms
+Elapsed time: 2363.64 ms
+Elapsed time: 2367.68 ms
+Finished running CLUE algorithm
+
+running on GPU
+input file data/input/toyDetector_1000.csv
+output file data/output/toyDetector_1000_3_5_5_8.csv
+Start to load input points
+Finished loading input points
+Start to run CLUE algorithm
+Elapsed time: 1.92768 ms
+Elapsed time: 1.88318 ms
+Elapsed time: 1.85169 ms
+Elapsed time: 1.85787 ms
+Elapsed time: 1.85132 ms
+Elapsed time: 1.8564 ms
+Elapsed time: 1.86096 ms
+Elapsed time: 1.84992 ms
+Elapsed time: 1.85358 ms
+Elapsed time: 1.85159 ms
+Finished running CLUE algorithm
+
+input file data/input/toyDetector_2000.csv
+output file data/output/toyDetector_2000_3_5_5_8.csv
+Start to load input points
+Finished loading input points
+Start to run CLUE algorithm
+Elapsed time: 3.21566 ms
+Elapsed time: 3.29392 ms
+Elapsed time: 3.28405 ms
+Elapsed time: 3.28315 ms
+Elapsed time: 3.28893 ms
+Elapsed time: 3.28199 ms
+Elapsed time: 3.29976 ms
+Elapsed time: 3.28534 ms
+Elapsed time: 3.3013 ms
+Elapsed time: 3.27488 ms
+Finished running CLUE algorithm
+
+input file data/input/toyDetector_3000.csv
+output file data/output/toyDetector_3000_3_5_5_8.csv
+Start to load input points
+Finished loading input points
+Start to run CLUE algorithm
+Elapsed time: 4.44484 ms
+Elapsed time: 4.43966 ms
+Elapsed time: 4.418 ms
+Elapsed time: 4.43065 ms
+Elapsed time: 4.42965 ms
+Elapsed time: 4.41824 ms
+Elapsed time: 4.44904 ms
+Elapsed time: 4.43267 ms
+Elapsed time: 4.41693 ms
+Elapsed time: 4.43564 ms
+Finished running CLUE algorithm
+
+input file data/input/toyDetector_4000.csv
+output file data/output/toyDetector_4000_3_5_5_8.csv
+Start to load input points
+Finished loading input points
+Start to run CLUE algorithm
+Elapsed time: 5.39518 ms
+Elapsed time: 5.38587 ms
+Elapsed time: 5.39545 ms
+Elapsed time: 5.378 ms
+Elapsed time: 5.38026 ms
+Elapsed time: 5.37606 ms
+Elapsed time: 5.37549 ms
+Elapsed time: 5.38124 ms
+Elapsed time: 5.38331 ms
+Elapsed time: 5.38879 ms
+Finished running CLUE algorithm
+
+input file data/input/toyDetector_5000.csv
+output file data/output/toyDetector_5000_3_5_5_8.csv
+Start to load input points
+Finished loading input points
+Start to run CLUE algorithm
+Elapsed time: 6.30197 ms
+Elapsed time: 6.27343 ms
+Elapsed time: 6.28059 ms
+Elapsed time: 6.26147 ms
+Elapsed time: 6.27208 ms
+Elapsed time: 6.27234 ms
+Elapsed time: 6.25791 ms
+Elapsed time: 6.26556 ms
+Elapsed time: 6.2613 ms
+Elapsed time: 6.3277 ms
+Finished running CLUE algorithm
+
+input file data/input/toyDetector_6000.csv
+output file data/output/toyDetector_6000_3_5_5_8.csv
+Start to load input points
+Finished loading input points
+Start to run CLUE algorithm
+Elapsed time: 7.14551 ms
+Elapsed time: 7.15345 ms
+Elapsed time: 7.13891 ms
+Elapsed time: 7.15764 ms
+Elapsed time: 7.14368 ms
+Elapsed time: 7.1349 ms
+Elapsed time: 7.14719 ms
+Elapsed time: 7.13825 ms
+Elapsed time: 7.16256 ms
+Elapsed time: 7.14974 ms
+Finished running CLUE algorithm
+
+input file data/input/toyDetector_7000.csv
+output file data/output/toyDetector_7000_3_5_5_8.csv
+Start to load input points
+Finished loading input points
+Start to run CLUE algorithm
+Elapsed time: 8.08602 ms
+Elapsed time: 8.06635 ms
+Elapsed time: 8.06158 ms
+Elapsed time: 8.04982 ms
+Elapsed time: 8.08896 ms
+Elapsed time: 8.06822 ms
+Elapsed time: 8.0773 ms
+Elapsed time: 8.06538 ms
+Elapsed time: 8.06459 ms
+Elapsed time: 8.07242 ms
+Finished running CLUE algorithm
+
+input file data/input/toyDetector_8000.csv
+output file data/output/toyDetector_8000_3_5_5_8.csv
+Start to load input points
+Finished loading input points
+Start to run CLUE algorithm
+Elapsed time: 9.0445 ms
+Elapsed time: 9.13866 ms
+Elapsed time: 9.1295 ms
+Elapsed time: 9.12188 ms
+Elapsed time: 9.11999 ms
+Elapsed time: 9.14063 ms
+Elapsed time: 9.12063 ms
+Elapsed time: 9.1414 ms
+Elapsed time: 9.10864 ms
+Elapsed time: 9.12292 ms
+Finished running CLUE algorithm
+
+input file data/input/toyDetector_9000.csv
+output file data/output/toyDetector_9000_3_5_5_8.csv
+Start to load input points
+Finished loading input points
+Start to run CLUE algorithm
+Elapsed time: 9.95283 ms
+Elapsed time: 10.0258 ms
+Elapsed time: 9.99997 ms
+Elapsed time: 10.0317 ms
+Elapsed time: 10.0159 ms
+Elapsed time: 10.004 ms
+Elapsed time: 10.0152 ms
+Elapsed time: 10.0165 ms
+Elapsed time: 10.0271 ms
+Elapsed time: 10.0121 ms
+Finished running CLUE algorithm
+
+input file data/input/toyDetector_10000.csv
+output file data/output/toyDetector_10000_3_5_5_8.csv
+Start to load input points
+Finished loading input points
+Start to run CLUE algorithm
+Elapsed time: 10.7832 ms
+Elapsed time: 10.8522 ms
+Elapsed time: 10.8418 ms
+Elapsed time: 10.8382 ms
+Elapsed time: 10.8716 ms
+Elapsed time: 10.8379 ms
+Elapsed time: 10.8585 ms
+Elapsed time: 10.8686 ms
+Elapsed time: 10.8514 ms
+Elapsed time: 10.8383 ms
+Finished running CLUE algorithm
+
