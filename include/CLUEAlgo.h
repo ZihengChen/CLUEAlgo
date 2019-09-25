@@ -6,11 +6,11 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <fstream>
 
 #include "LayerTiles.h"
 #include "Points.h"
 
-#define NLAYERS 1
 
 class CLUEAlgo{
 
@@ -52,23 +52,45 @@ class CLUEAlgo{
 
     void makeClusters();
 
-    void verboseResults(int nVerbose = -1 ){ 
+    void verboseResults( std::string outputFileName = "cout", int nVerbose = -1){ 
       
       if (nVerbose ==-1) nVerbose=points_.n;
 
-      std::cout << "index,x,y,layer,weight,rho,delta,nh,isSeed,clusterId"<< std::endl;
-      for(int i = 0; i < nVerbose; i++) {
-        std::cout << i << ","<<points_.x[i]<< ","<<points_.y[i]<< ","<<points_.layer[i] << ","<<points_.weight[i];
-        std::cout << "," << points_.rho[i];
-        if (points_.delta[i] < 999)
-          std::cout << ","<<points_.delta[i];
-        else
-          std::cout << ",500";
-        std::cout << ","<<points_.nearestHigher[i];
-        std::cout << "," << points_.isSeed[i];
-        std::cout << ","<<points_.clusterIndex[i];
-        std::cout << std::endl;
+      // verbose to screen
+      if (outputFileName.compare("cout") == 0 )  {
+        std::cout << "index,x,y,layer,weight,rho,delta,nh,isSeed,clusterId"<< std::endl;
+        for(int i = 0; i < nVerbose; i++) {
+          std::cout << i << ","<<points_.x[i]<< ","<<points_.y[i]<< ","<<points_.layer[i] << ","<<points_.weight[i];
+          std::cout << "," << points_.rho[i];
+          if (points_.delta[i] <= 999) 
+            std::cout << ","<<points_.delta[i];
+          else
+            std::cout << ",999"; // convert +inf to 999 in verbose
+          std::cout << ","<<points_.nearestHigher[i];
+          std::cout << "," << points_.isSeed[i];
+          std::cout << ","<<points_.clusterIndex[i];
+          std::cout << std::endl;
+        }
       }
+      // verbose to file
+      else{
+        std::ofstream oFile(outputFileName);
+        oFile << "index,x,y,layer,weight,rho,delta,nh,isSeed,clusterId\n";
+        for(int i = 0; i < nVerbose; i++) {
+          oFile << i << ","<<points_.x[i]<< ","<<points_.y[i]<< ","<<points_.layer[i] << ","<<points_.weight[i];
+          oFile << "," << points_.rho[i];
+          if (points_.delta[i] <= 999) 
+            oFile << ","<<points_.delta[i];
+          else
+            oFile << ",999"; // convert +inf to 999 in verbose
+          oFile << ","<<points_.nearestHigher[i];
+          oFile << "," << points_.isSeed[i];
+          oFile << ","<<points_.clusterIndex[i];
+          oFile << "\n";
+        }
+        oFile.close();
+      }
+        
     }
     
     

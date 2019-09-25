@@ -4,6 +4,7 @@
 #include <cstdint>
 #include <array>
 
+#define NLAYERS 1
 
 namespace LayerTilesConstants {
 
