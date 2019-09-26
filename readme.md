@@ -1,6 +1,6 @@
 # Standalone CLUE Algorithm on GPU and CPU
 
-*Z.Chen[1], A. Di Pilato[2], F. Pantaleo[3], M. Rovere[3]*
+Z.Chen[1], A. Di Pilato[2], F. Pantaleo[3], M. Rovere[3]
 
 *[1] Northwestern University, [2]University of Bari, [3] CERN*
 
@@ -55,12 +55,14 @@ contact us at zihengchen2015@u.northwestern.edu
 Result of CPU and GPU are tested to identical.
 
 
-
-## 3. Performance
+## 3. Examples
 The clustering result of a few sythetic dataset is shown below
 <p align=center><img width="100%" src=https://github.com/ZihengChen/CLUEAlgo/blob/master/plots/examples.png/></p> 
 
-We generate toy events on toy detector consist of 1 layer (left) or 100 layers (right). 
+## 4. Performannce on Toy Events
+We generate toy events on toy detector consist of 1 layer (left) or 100 layers (right).
+A toy event with 4000 points per layer is shown as below.
+<p align=center><img width="40%" src=https://github.com/ZihengChen/CLUEAlgo/blob/master/plots/toyDetector_4000_5_10_5_8.png/></p>
 The average execution time of toy events on CPU and GPU are shown below
 <p align=center><img width="100%" src=https://github.com/ZihengChen/CLUEAlgo/blob/master/plots/executionTime.png/></p> 
 
