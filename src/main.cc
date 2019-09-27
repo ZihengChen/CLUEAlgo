@@ -95,10 +95,6 @@ int main(int argc, char *argv[]) {
     return 0;
   }
 
-  if (deltac > d0) {
-    std::cout << "must satisfy deltac<=d0 " << std::endl;
-    return 0;
-  }
 
   //////////////////////////////
   // MARK -- set input and output files

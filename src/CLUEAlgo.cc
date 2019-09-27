@@ -65,7 +65,7 @@ void CLUEAlgo::calculateDistanceToHigher( std::array<LayerTiles, NLAYERS> & allL
     LayerTiles& lt = allLayerTiles[points_.layer[i]];
 
     // get search box 
-    std::array<int,4> search_box = lt.searchBox(points_.x[i]-d0_, points_.x[i]+d0_, points_.y[i]-d0_, points_.y[i]+d0_);
+    std::array<int,4> search_box = lt.searchBox(points_.x[i]-dnh_, points_.x[i]+dnh_, points_.y[i]-dnh_, points_.y[i]+dnh_);
     
     // loop over all bins in the search box
     for(int xBin = search_box[0]; xBin < search_box[1]+1; ++xBin) {
@@ -79,13 +79,13 @@ void CLUEAlgo::calculateDistanceToHigher( std::array<LayerTiles, NLAYERS> & allL
         // interate inside this bin
         for (int binIter = 0; binIter < binSize; binIter++) {
           int j = lt[binId][binIter];
-          // query N'_{d0_}(i)
+          // query N'_{dnh_}(i)
           bool foundHigher = (points_.rho[j] > points_.rho[i]);
           // in the rare case where rho is the same, use detid
           foundHigher = foundHigher || ((points_.rho[j] == points_.rho[i]) && (j>i) );
           float dist_ij = distance(i, j);
-          if(foundHigher && dist_ij <= d0_) { // definition of N'_{d0_}(i)
-            // find the nearest point within N'_{d0_}(i)
+          if(foundHigher && dist_ij <= dnh_) { // definition of N'_{dnh_}(i)
+            // find the nearest point within N'_{dnh_}(i)
             if (dist_ij < delta_i) {
               // update delta_i and nearestHigher_i
               delta_i = dist_ij;

@@ -1,9 +1,17 @@
 # bin/main [fileName] [dc] [d0] [deltac] [rhoc] [useGPU] [totalNumberOfEvent] [verbose]
-bin/main sissa_1000 20 20 20 25 0 10 1
-bin/main sissa_4000 20 40 20 80 0 10 1
-bin/main circles_1000 20 500 100 15 0 10 1
-bin/main moons_1000 20 150 150 15 0 10 1
-bin/main aniso_1000 20 50 50 65 0 10 1
+bin/main circles_1000 20 20 90 12 0 10 1
+bin/main moons_1000 20 20 150 15 0 10 1
+bin/main aniso_1000 20 20 50 50 0 10 1
+
+bin/main sissa_1000 20 20 80 25 0 10 1
+
+bin/main sissa_4000 20 10 80 80 0 10 1
+bin/main sissa_4000 20 20 80 80 0 10 1
+bin/main sissa_4000 20 30 80 80 0 10 1
+bin/main sissa_4000 20 40 80 80 0 10 1
+bin/main sissa_4000 20 60 80 80 0 10 1
+
+
 
 export DC=5
 export D0=10

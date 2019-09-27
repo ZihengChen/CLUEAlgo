@@ -21,13 +21,14 @@ class CLUEAlgo{
       d0_ = d0; 
       deltac_ = deltac; 
       rhoc_ = rhoc;
+      dnh_ = std::max(d0_, deltac_);
       
     }
     // distrcutor
     ~CLUEAlgo(){} 
     
     // public variables
-    float dc_, d0_, deltac_, rhoc_;
+    float dc_, dnh_, d0_, deltac_, rhoc_;
     Points points_; 
 
     // public methods

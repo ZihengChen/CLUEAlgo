@@ -72,7 +72,7 @@ __global__ void kernel_compute_density( LayerTilesGPU *d_hist,
 
 __global__ void kernel_compute_distanceToHigher(LayerTilesGPU* d_hist, 
                                                 PointsPtr d_points, 
-                                                float d0,
+                                                float dnh,
                                                 int numberOfPoints
                                                 ) 
 {
@@ -88,7 +88,7 @@ __global__ void kernel_compute_distanceToHigher(LayerTilesGPU* d_hist,
     float rhoi = d_points.rho[i];
 
     // get search box 
-    int4 search_box = d_hist[layeri].searchBox(xi-d0, xi+d0, yi-d0, yi+d0);
+    int4 search_box = d_hist[layeri].searchBox(xi-dnh, xi+dnh, yi-dnh, yi+dnh);
 
     // loop over all bins in the search box
     for(int xBin = search_box.x; xBin < search_box.y+1; ++xBin) {
@@ -101,15 +101,15 @@ __global__ void kernel_compute_distanceToHigher(LayerTilesGPU* d_hist,
         // interate inside this bin
         for (int binIter = 0; binIter < binSize; binIter++) {
           int j = d_hist[layeri][binId][binIter];
-          // query N'_{dc_}(i)
+          // query N'_{dnh}(i)
           float xj = d_points.x[j];
           float yj = d_points.y[j];
           float dist_ij = std::sqrt((xi-xj)*(xi-xj) + (yi-yj)*(yi-yj));
           bool foundHigher = (d_points.rho[j] > rhoi);
           // in the rare case where rho is the same, use detid
           foundHigher = foundHigher || ( (d_points.rho[j] == rhoi) && (j>i));
-          if(foundHigher && dist_ij <= d0) { // definition of N'_{dc_}(i)
-            // find the nearest point within N'_{dc_}(i)
+          if(foundHigher && dist_ij <= dnh) { // definition of N'_{dnh}(i)
+            // find the nearest point within N'_{dnh}(i)
             if (dist_ij<deltai) {
               // update deltai and nearestHigheri
               deltai = dist_ij;
@@ -220,7 +220,7 @@ void CLUEAlgoGPU::makeClusters( ) {
   const dim3 gridSize(ceil(points_.n/1024.0),1,1);
   kernel_compute_histogram <<<gridSize,blockSize>>>(d_hist, d_points, points_.n);
   kernel_compute_density <<<gridSize,blockSize>>>(d_hist, d_points, dc_, points_.n);
-  kernel_compute_distanceToHigher <<<gridSize,blockSize>>>(d_hist, d_points, d0_, points_.n);
+  kernel_compute_distanceToHigher <<<gridSize,blockSize>>>(d_hist, d_points, dnh_, points_.n);
   kernel_find_clusters <<<gridSize,blockSize>>>(d_seeds, d_followers, d_points, deltac_,d0_,rhoc_, points_.n);  
   
   ////////////////////////////////////////////
