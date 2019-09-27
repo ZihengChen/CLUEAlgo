@@ -44,9 +44,11 @@ make
 
 If the projects compiles without errors, you can go run CLUEAlgo by
 ```bash
-bin/main [input.csv] [d_c] [d_0] [delta_c] [rho_c] [useCUDA]
-# useCUDA = 1 for GPU runs
+# bin/main [fileName] [dc] [d0] [deltac] [rhoc] [useGPU] [totalNumberOfEvent] [verbose]
+bin/main aniso_1000 20 20 50 50 0 10 1
 ```
+
+
 If you meet any error when compiling or running this project, 
 contact us at zihengchen2015@u.northwestern.edu
 ## 2. Implementation
