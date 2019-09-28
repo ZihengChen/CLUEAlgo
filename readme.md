@@ -42,32 +42,34 @@ cd CLUEAlgo
 make
 ```
 
+### 2. Run CLUE
+CLUE needs four parameters `dc, deltao, deltac, rhoc`
+
 If the projects compiles without errors, you can go run CLUEAlgo by
 ```bash
 # bin/main [fileName] [dc] [deltao] [deltac] [rhoc] [useGPU] [totalNumberOfEvent] [verbose]
 bin/main aniso_1000 20 20 50 50 0 10 1
 ```
 
-### Format of Input and output
 The input files are `data/input/*.csv` with columns 
-* `x`, `y`, `layer`, `weight`
+* x, y, layer, weight
 
 The output files are `data/output/*.csv` with columns
-* `x`, `y`,`layer`, `weight`,` rho`, `delta`, `nh`, `isSeed`, `clusterId`
+* x, y, layer, weight, rho, delta, nh, isSeed, clusterId
 
 If you meet any error when compiling or running this project, 
 contact us at zihengchen2015@u.northwestern.edu
-## 2. Implementation
+## 3. Implementation
 
 <p align=center><img width="50%" src=https://github.com/ZihengChen/CLUEAlgo/blob/master/plots/implementations.png/></p> 
 Result of CPU and GPU are tested to identical.
 
 
-## 3. Examples
+## 4. Examples
 The clustering result of a few sythetic dataset is shown below
 <p align=center><img width="100%" src=https://github.com/ZihengChen/CLUEAlgo/blob/master/plots/examples.png/></p> 
 
-## 4. Performannce on Toy Events
+## 5. Performannce on Toy Events
 We generate toy events on toy detector consist of 1 layer (left) or 100 layers (right).
 A toy event with 4000 points per layer is shown as below.
 <p align=center><img width="40%" src=https://github.com/ZihengChen/CLUEAlgo/blob/master/plots/toyDetector_4000_5_10_5_8.png/></p>
