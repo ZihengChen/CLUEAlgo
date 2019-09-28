@@ -16,19 +16,19 @@ class CLUEAlgo{
 
   public:
     // constructor
-    CLUEAlgo(float dc, float d0, float deltac, float rhoc ){ 
+    CLUEAlgo(float dc, float deltao, float deltac, float rhoc ){ 
       dc_ = dc; 
-      d0_ = d0; 
+      deltao_ = deltao; 
       deltac_ = deltac; 
       rhoc_ = rhoc;
-      dnh_ = std::max(d0_, deltac_);
+      dm_ = std::max(deltao_, deltac_);
       
     }
     // distrcutor
     ~CLUEAlgo(){} 
     
     // public variables
-    float dc_, dnh_, d0_, deltac_, rhoc_;
+    float dc_, dm_, deltao_, deltac_, rhoc_;
     Points points_; 
 
     // public methods

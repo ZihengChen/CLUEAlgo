@@ -72,7 +72,7 @@ __global__ void kernel_compute_density( LayerTilesGPU *d_hist,
 
 __global__ void kernel_compute_distanceToHigher(LayerTilesGPU* d_hist, 
                                                 PointsPtr d_points, 
-                                                float dnh,
+                                                float dm,
                                                 int numberOfPoints
                                                 ) 
 {
@@ -88,7 +88,7 @@ __global__ void kernel_compute_distanceToHigher(LayerTilesGPU* d_hist,
     float rhoi = d_points.rho[i];
 
     // get search box 
-    int4 search_box = d_hist[layeri].searchBox(xi-dnh, xi+dnh, yi-dnh, yi+dnh);
+    int4 search_box = d_hist[layeri].searchBox(xi-dm, xi+dm, yi-dm, yi+dm);
 
     // loop over all bins in the search box
     for(int xBin = search_box.x; xBin < search_box.y+1; ++xBin) {
@@ -101,15 +101,15 @@ __global__ void kernel_compute_distanceToHigher(LayerTilesGPU* d_hist,
         // interate inside this bin
         for (int binIter = 0; binIter < binSize; binIter++) {
           int j = d_hist[layeri][binId][binIter];
-          // query N'_{dnh}(i)
+          // query N'_{dm}(i)
           float xj = d_points.x[j];
           float yj = d_points.y[j];
           float dist_ij = std::sqrt((xi-xj)*(xi-xj) + (yi-yj)*(yi-yj));
           bool foundHigher = (d_points.rho[j] > rhoi);
           // in the rare case where rho is the same, use detid
           foundHigher = foundHigher || ( (d_points.rho[j] == rhoi) && (j>i));
-          if(foundHigher && dist_ij <= dnh) { // definition of N'_{dnh}(i)
-            // find the nearest point within N'_{dnh}(i)
+          if(foundHigher && dist_ij <= dm) { // definition of N'_{dm}(i)
+            // find the nearest point within N'_{dm}(i)
             if (dist_ij<deltai) {
               // update deltai and nearestHigheri
               deltai = dist_ij;
@@ -129,7 +129,7 @@ __global__ void kernel_compute_distanceToHigher(LayerTilesGPU* d_hist,
 __global__ void kernel_find_clusters( GPU::VecArray<int,maxNSeeds>* d_seeds,
                                       GPU::VecArray<int,maxNFollowers>* d_followers,
                                       PointsPtr d_points,
-                                      float deltac, float d0, float rhoc,
+                                      float deltac, float deltao, float rhoc,
                                       int numberOfPoints
                                       ) 
 {
@@ -142,7 +142,7 @@ __global__ void kernel_find_clusters( GPU::VecArray<int,maxNSeeds>* d_seeds,
     float deltai = d_points.delta[i];
     float rhoi = d_points.rho[i];
     bool isSeed = (deltai > deltac) && (rhoi >= rhoc);
-    bool isOutlier = (deltai > d0) && (rhoi < rhoc);
+    bool isOutlier = (deltai > deltao) && (rhoi < rhoc);
 
     if (isSeed) {
       // set isSeed as 1
@@ -220,8 +220,8 @@ void CLUEAlgoGPU::makeClusters( ) {
   const dim3 gridSize(ceil(points_.n/1024.0),1,1);
   kernel_compute_histogram <<<gridSize,blockSize>>>(d_hist, d_points, points_.n);
   kernel_compute_density <<<gridSize,blockSize>>>(d_hist, d_points, dc_, points_.n);
-  kernel_compute_distanceToHigher <<<gridSize,blockSize>>>(d_hist, d_points, dnh_, points_.n);
-  kernel_find_clusters <<<gridSize,blockSize>>>(d_seeds, d_followers, d_points, deltac_,d0_,rhoc_, points_.n);  
+  kernel_compute_distanceToHigher <<<gridSize,blockSize>>>(d_hist, d_points, dm_, points_.n);
+  kernel_find_clusters <<<gridSize,blockSize>>>(d_seeds, d_followers, d_points, deltac_,deltao_,rhoc_, points_.n);  
   
   ////////////////////////////////////////////
   // assign clusters

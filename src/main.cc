@@ -6,7 +6,7 @@
 #include "CLUEAlgoGPU.h"
 
 void mainRun( std::string inputFileName, std::string outputFileName,
-              float dc, float d0, float deltac, float rhoc, 
+              float dc, float deltao, float deltac, float rhoc, 
               bool useGPU, int repeats, bool verbose  ) {
 
   //////////////////////////////
@@ -39,7 +39,7 @@ void mainRun( std::string inputFileName, std::string outputFileName,
   //////////////////////////////   
   std::cout << "Start to run CLUE algorithm" << std::endl;      
   if (useGPU) {
-    CLUEAlgoGPU clueAlgo(dc, d0, deltac, rhoc);
+    CLUEAlgoGPU clueAlgo(dc, deltao, deltac, rhoc);
     for (int r = 0; r<repeats; r++){
       clueAlgo.setPoints(x.size(), &x[0],&y[0],&layer[0],&weight[0]);
       // measure excution time of makeClusters
@@ -52,7 +52,7 @@ void mainRun( std::string inputFileName, std::string outputFileName,
     // output result to outputFileName. -1 means all points. 
     if (verbose) clueAlgo.verboseResults(outputFileName, -1);
   } else {
-    CLUEAlgo clueAlgo(dc, d0, deltac, rhoc);
+    CLUEAlgo clueAlgo(dc, deltao, deltac, rhoc);
     for (int r = 0; r<repeats; r++){
       clueAlgo.setPoints(x.size(), &x[0],&y[0],&layer[0],&weight[0]);
       // measure excution time of makeClusters
@@ -77,21 +77,21 @@ int main(int argc, char *argv[]) {
   //////////////////////////////
   // MARK -- set algorithm parameters
   //////////////////////////////
-  float dc=20, d0=20, deltac=20, rhoc=80;
+  float dc=20, deltao=20, deltac=20, rhoc=80;
   bool useGPU=false;
   int totalNumberOfEvent = 10;
   bool verbose=false;
 
   if (argc == 9) {
     dc = std::stof(argv[2]);
-    d0 = std::stof(argv[3]);
+    deltao = std::stof(argv[3]);
     deltac = std::stof(argv[4]);
     rhoc = std::stof(argv[5]);
     useGPU = (std::stoi(argv[6])==1)? true:false;
     totalNumberOfEvent = std::stoi(argv[7]);
     verbose = (std::stoi(argv[8])==1)? true:false;
   } else {
-    std::cout << "bin/main [fileName] [dc] [d0] [deltac] [rhoc] [useGPU] [totalNumberOfEvent] [verbose]" << std::endl;
+    std::cout << "bin/main [fileName] [dc] [deltao] [deltac] [rhoc] [useGPU] [totalNumberOfEvent] [verbose]" << std::endl;
     return 0;
   }
 
@@ -112,7 +112,7 @@ int main(int argc, char *argv[]) {
   outputFileName.append(underscore);
   outputFileName.append(std::to_string(int(dc)));
   outputFileName.append(underscore);
-  outputFileName.append(std::to_string(int(d0)));
+  outputFileName.append(std::to_string(int(deltao)));
   outputFileName.append(underscore);
   outputFileName.append(std::to_string(int(deltac)));
   outputFileName.append(underscore);
@@ -125,7 +125,7 @@ int main(int argc, char *argv[]) {
   // MARK -- test run
   //////////////////////////////
   mainRun(inputFileName, outputFileName,
-          dc, d0, deltac, rhoc, 
+          dc, deltao, deltac, rhoc, 
           useGPU, totalNumberOfEvent,verbose);
 
   return 0;
