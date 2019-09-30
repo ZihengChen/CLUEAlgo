@@ -7,7 +7,9 @@ Z.Chen[1], A. Di Pilato[2], F. Pantaleo[3], M. Rovere[3]
 ## 1. Setup on a CERN machine with GPUs
 
 Source the LCG View containing the correct version of GCC and Boost:
-`source /cvmfs/sft.cern.ch/lcg/views/LCG_96/x86_64-centos7-gcc8-opt/setup.sh`
+```bash
+source /cvmfs/sft.cern.ch/lcg/views/LCG_96/x86_64-centos7-gcc8-opt/setup.sh
+```
 
 
 
