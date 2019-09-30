@@ -11,25 +11,9 @@ Source the LCG View containing the correct version of GCC and Boost:
 source /cvmfs/sft.cern.ch/lcg/views/LCG_96/x86_64-centos7-gcc8-opt/setup.sh
 ```
 
-
-
-First build your standalone CUDA development workplace. 
-This should take a few minutes to compile.
-And test run of `vectorAdd` should be good.
-```bash
-cp -r /usr/local/cuda-10.1/samples ./CUDA_Sample_10_1
-cd CUDA_Sample_10_1
-make -j
-bin/x86_64/linux/release/vectorAdd
-```
-
-
-
 Then setup this project. **Fork this reop if developers**. In `CUDA_Sample_10_1`
 ```bash
-mkdir 8_MyProject
-cd 8_MyProject
-git clone https://github.com/YOUR_FOLK/CLUEAlgo.git
+git clone https://github.com/YOUR_FORK/CLUEAlgo.git
 cd CLUEAlgo
 make
 ```
@@ -46,8 +30,8 @@ _rhoc_ is the minimum local density for a point to be promoted as a Seed.
 
 If the projects compiles without errors, you can go run CLUEAlgo by
 ```bash
-# bin/main [fileName] [dc] [deltao] [deltac] [rhoc] [useGPU] [totalNumberOfEvent] [verbose]
-bin/main aniso_1000 20 20 50 50 0 10 1
+# ./main [fileName] [dc] [deltao] [deltac] [rhoc] [useGPU] [totalNumberOfEvent] [verbose]
+./main aniso_1000 20 20 50 50 0 10 1
 ```
 
 The input files are `data/input/*.csv` with columns 
