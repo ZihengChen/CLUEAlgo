@@ -37,6 +37,13 @@ make
 ### 2. Run CLUE
 CLUE needs four parameters `dc, deltao, deltac, rhoc`
 
+_dc_ is the critical distance used to compute the local density.
+_deltao_ is the maximum distance for a point to be linked to a nearest higher
+point.
+_deltac_ is the minimum distance for a local high density point to be promoted
+as a Seed.
+_rhoc_ is the minimum local density for a point to be promoted as a Seed.
+
 If the projects compiles without errors, you can go run CLUEAlgo by
 ```bash
 # bin/main [fileName] [dc] [deltao] [deltac] [rhoc] [useGPU] [totalNumberOfEvent] [verbose]
