@@ -11,7 +11,7 @@ Source the LCG View containing the correct version of GCC and Boost:
 source /cvmfs/sft.cern.ch/lcg/views/LCG_96/x86_64-centos7-gcc8-opt/setup.sh
 ```
 
-Then setup this project. **Fork this reop if developers**. In `CUDA_Sample_10_1`
+Then setup this project. **Fork this reop if developers**.
 ```bash
 git clone https://github.com/YOUR_FORK/CLUEAlgo.git
 cd CLUEAlgo
