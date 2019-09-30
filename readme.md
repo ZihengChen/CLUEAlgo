@@ -4,22 +4,12 @@ Z.Chen[1], A. Di Pilato[2], F. Pantaleo[3], M. Rovere[3]
 
 *[1] Northwestern University, [2]University of Bari, [3] CERN*
 
-## 1. Setup on felk40 or vinavx2
+## 1. Setup on a CERN machine with GPUs
 
-This needs `gcc version 7.4.1` and `CUDA_10_1 with driver V418`.
-Note that `gcc v4.8` is the defaul gcc version on Felk40 or Vinavx2, 
-so you have to switch to `gcc version 7.4.1` by setting up CMSSW_11_0_X. 
-The only purpose of CMSSW here is to prove a correct version of gcc.
-If you already have `gcc version 7.4.1` ad default gcc, you can
-skip this step.
+Source the LCG View containing the correct version of GCC and Boost:
+`source /cvmfs/sft.cern.ch/lcg/views/LCG_96/x86_64-centos7-gcc8-opt/setup.sh`
 
-```bash
-# skip this if your defaut gcc is V7.4.1
-cmsrel CMSSW_11_0_X 
-cd CMSSW_11_0_X/src
-cmsenv
-cd ../..
-```
+
 
 First build your standalone CUDA development workplace. 
 This should take a few minutes to compile.
