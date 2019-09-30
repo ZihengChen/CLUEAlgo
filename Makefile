@@ -65,24 +65,21 @@ all: build
 
 build: main
 
-lib/CLUEAlgo.o:src/CLUEAlgo.cc
+CLUEAlgo.o:src/CLUEAlgo.cc
 	$(EXEC) $(NVCC) $(INCLUDES) $(ALL_CCFLAGS) $(GENCODE_FLAGS) -o $@ -c $<
-	# $(EXEC) g++ -shared -o lib/CLUEAlgo.so lib/CLUEAlgo.o
-lib/CLUEAlgoGPU.o:src/CLUEAlgoGPU.cu
-	$(EXEC) $(NVCC) $(INCLUDES) $(ALL_CCFLAGS) $(GENCODE_FLAGS) -o $@ -c $<
-	#$(EXEC) g++ -shared -o lib/CLUEAlgoGPU.so lib/CLUEAlgoGPU.o
-
-lib/main.o:src/main.cc
+CLUEAlgoGPU.o:src/CLUEAlgoGPU.cu
 	$(EXEC) $(NVCC) $(INCLUDES) $(ALL_CCFLAGS) $(GENCODE_FLAGS) -o $@ -c $<
 
-main: lib/main.o lib/CLUEAlgoGPU.o lib/CLUEAlgo.o
+main.o:src/main.cc
+	$(EXEC) $(NVCC) $(INCLUDES) $(ALL_CCFLAGS) $(GENCODE_FLAGS) -o $@ -c $<
+
+main: main.o CLUEAlgoGPU.o CLUEAlgo.o
 	$(EXEC) $(NVCC) $(ALL_LDFLAGS) $(GENCODE_FLAGS) -o $@ $+ $(LIBRARIES)
-	$(EXEC) mv $@ bin/
 
 run: build
-	$(EXEC) bin/main
+	$(EXEC) main
 
 clean:
-	rm -f bin/* lib/*
+	rm -f main main.o CLUEAlgo.o CLUEAlgoGPU.o
 
 clobber: clean

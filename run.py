@@ -47,7 +47,7 @@ if __name__ == '__main__':
 
   args = parser.parse_args()
 
-  out_ = commands.getoutput("./bin/main %s %f %f %f %f %d %d %d" % (
+  out_ = commands.getoutput("./main %s %f %f %f %f %d %d %d" % (
     (args.file,
       args.dc,
       args.deltao,
