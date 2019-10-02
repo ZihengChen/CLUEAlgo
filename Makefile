@@ -12,7 +12,7 @@ NVCC          := $(CUDA_PATH)/bin/nvcc -ccbin $(HOST_COMPILER)
 # internal flags
 TARGET_SIZE := 64
 NVCCFLAGS   := -m${TARGET_SIZE}
-CCFLAGS     :=
+CCFLAGS     := -std=c++14 -O2 -g
 LDFLAGS     :=
 
 # Debug build flags
@@ -38,6 +38,7 @@ ALL_LDFLAGS += $(addprefix -Xlinker ,$(EXTRA_LDFLAGS))
 # Common includes and paths for CUDA
 INCLUDES  := -I../../common/inc -I include -I cupla/include -I cupla/alpaka/include
 LIBRARIES :=
+CUPLA_CUDA_ASYNC     := -DCUPLA_STREAM_ASYNC_ENABLED=1 
 
 ################################################################################
 
@@ -67,19 +68,23 @@ build: main
 
 CLUEAlgo.o:src/CLUEAlgo.cc
 	$(EXEC) $(NVCC) $(INCLUDES) $(ALL_CCFLAGS) $(GENCODE_FLAGS) -o $@ -c $<
+
+CLUEAlgoCupla.o:src/CLUEAlgoCupla.cu
+	$(EXEC) $(NVCC) $(INCLUDES) $(ALL_CCFLAGS) $(CUPLA_CUDA_ASYNC) -o $@ -c $<
+
 CLUEAlgoGPU.o:src/CLUEAlgoGPU.cu
 	$(EXEC) $(NVCC) $(INCLUDES) $(ALL_CCFLAGS) $(GENCODE_FLAGS) -o $@ -c $<
 
 main.o:src/main.cc
 	$(EXEC) $(NVCC) $(INCLUDES) $(ALL_CCFLAGS) $(GENCODE_FLAGS) -o $@ -c $<
 
-main: main.o CLUEAlgoGPU.o CLUEAlgo.o
+main: main.o CLUEAlgoGPU.o CLUEAlgo.o CLUEAlgoCupla.o
 	$(EXEC) $(NVCC) $(ALL_LDFLAGS) $(GENCODE_FLAGS) -o $@ $+ $(LIBRARIES)
 
 run: build
 	$(EXEC) main
 
 clean:
-	rm -f main main.o CLUEAlgo.o CLUEAlgoGPU.o
+	rm -f main main.o CLUEAlgo.o CLUEAlgoGPU.o CLUEAlgoCupla.o
 
 clobber: clean
