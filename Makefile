@@ -40,6 +40,8 @@ INCLUDES  := -I../../common/inc -I include -I cupla/include -I cupla/alpaka/incl
 LIBRARIES :=
 CUPLA_CUDA_ASYNC     := -DCUPLA_STREAM_ASYNC_ENABLED=1 
 
+CUDA_FLAGS := -x cu
+
 ################################################################################
 
 # Gencode arguments
@@ -69,8 +71,8 @@ build: main
 CLUEAlgo.o:src/CLUEAlgo.cc
 	$(EXEC) $(NVCC) $(INCLUDES) $(ALL_CCFLAGS) $(GENCODE_FLAGS) -o $@ -c $<
 
-CLUEAlgoCupla.o:src/CLUEAlgoCupla.cu
-	$(EXEC) $(NVCC) $(INCLUDES) $(ALL_CCFLAGS) $(CUPLA_CUDA_ASYNC) -o $@ -c $<
+CLUEAlgoCupla.o:src/CLUEAlgoCupla.cc
+	$(EXEC) $(NVCC) $(INCLUDES) $(ALL_CCFLAGS) $(CUDA_FLAGS) $(CUPLA_CUDA_ASYNC) -o $@ -c $<
 
 CLUEAlgoGPU.o:src/CLUEAlgoGPU.cu
 	$(EXEC) $(NVCC) $(INCLUDES) $(ALL_CCFLAGS) $(GENCODE_FLAGS) -o $@ -c $<

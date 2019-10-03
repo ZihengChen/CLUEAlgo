@@ -1,21 +1,14 @@
 #ifndef CLUEAlgoCupla_h
 #define CLUEAlgoCupla_h
 
-
-#define ALPAKA_ACC_GPU_CUDA_ENABLED
-#ifndef CUPLA_HEADER_ONLY
-#   define CUPLA_HEADER_ONLY 1
-#endif
 #include <cupla/config/GpuCudaRt.hpp>
-
-#define ALPAKA_ACC_GPU_CUDA_ENABLED 1
 #include <cuda_to_cupla.hpp>
 
 #include "LayerTilesCupla.h"
 #include "CLUEAlgo.h"
 
-using Dim = alpaka::dim::DimInt<3>;
-using Idx = std::size_t;
+using Dim = cupla::cupla_cuda_async::KernelDim;
+using Idx = cupla::cupla_cuda_async::IdxType;
 using Acc = alpaka::acc::AccGpuCudaRt<Dim, Idx>;
 
 static const int maxNSeeds = 10000;

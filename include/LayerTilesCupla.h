@@ -34,7 +34,7 @@ class LayerTilesCupla {
 
     ALPAKA_FN_ACC
     void fill(float x, float y, int i) {
-      layerTiles_[getGlobalBin(x,y)].push_back(i);
+      layerTiles_[getGlobalBin(x,y)].push_back(acc_, i);
     }
 
     ALPAKA_FN_HOST_ACC int getXBin(float x) const {

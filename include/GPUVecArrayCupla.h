@@ -44,9 +44,9 @@ template <class T, int maxSize> struct VecArray {
 #ifdef __CUDACC__
 
   // thread-safe version of the vector, when used in a CUDA kernel
-  template<typename Acc>
+  template<typename T_Acc>
   ALPAKA_FN_ACC
-  int push_back(Acc acc, const T &element) {
+  int push_back(const T_Acc &acc, const T &element) {
     auto previousSize = atomicAdd(&m_size, 1);
     if (previousSize < maxSize) {
       m_data[previousSize] = element;
@@ -57,9 +57,9 @@ template <class T, int maxSize> struct VecArray {
     }
   }
 
-  template <typename Acc, class... Ts>
+  template <typename T_Acc, class... Ts>
   ALPAKA_FN_ACC
-  int emplace_back(Acc acc, Ts &&... args) {
+  int emplace_back(const T_Acc & acc, Ts &&... args) {
     auto previousSize = atomicAdd(&m_size, 1);
     if (previousSize < maxSize) {
       (new (&m_data[previousSize]) T(std::forward<Ts>(args)...));
