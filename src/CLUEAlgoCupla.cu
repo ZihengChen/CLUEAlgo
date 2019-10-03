@@ -15,7 +15,7 @@
 
 template <int blockSize> struct kernel_compute_histogram {
   template <typename T_Acc>
-  ALPAKA_FN_ACC void operator()(T_Acc const &acc, LayerTilesCupla *d_hist,
+  ALPAKA_FN_ACC void operator()(T_Acc const &acc, LayerTilesCupla<T_Acc> *d_hist,
                                 PointsPtr d_points, int numberOfPoints) const {
     int i = blockIdx.x * blockDim.x + threadIdx.x;
     if (i < numberOfPoints) {
@@ -27,7 +27,7 @@ template <int blockSize> struct kernel_compute_histogram {
 
 template <int blockSize> struct kernel_compute_density {
   template <typename T_Acc>
-  ALPAKA_FN_ACC void operator()(T_Acc const &acc, LayerTilesCupla *d_hist,
+  ALPAKA_FN_ACC void operator()(T_Acc const &acc, LayerTilesCupla<T_Acc> *d_hist,
                                 PointsPtr d_points, float dc,
                                 int numberOfPoints) const {
     int i = blockIdx.x * blockDim.x + threadIdx.x;
@@ -72,7 +72,7 @@ template <int blockSize> struct kernel_compute_density {
 
 template <int blockSize> struct kernel_compute_distanceToHigher {
   template <typename T_Acc>
-  ALPAKA_FN_ACC void operator()(T_Acc const &acc, LayerTilesCupla *d_hist,
+  ALPAKA_FN_ACC void operator()(T_Acc const &acc, LayerTilesCupla<T_Acc> *d_hist,
                                 PointsPtr d_points, float dm,
                                 int numberOfPoints) const {
     int i = blockIdx.x * blockDim.x + threadIdx.x;
@@ -129,8 +129,8 @@ template <int blockSize> struct kernel_compute_distanceToHigher {
 template <int blockSize> struct kernel_find_clusters {
   template <typename T_Acc>
   ALPAKA_FN_ACC void
-  operator()(T_Acc const &acc, GPU::VecArray<int, maxNSeeds> *d_seeds,
-             GPU::VecArray<int, maxNFollowers> *d_followers, PointsPtr d_points,
+  operator()(T_Acc const &acc, GPUCupla::VecArray<int, maxNSeeds> *d_seeds,
+             GPUCupla::VecArray<int, maxNFollowers> *d_followers, PointsPtr d_points,
              float deltac, float deltao, float rhoc, int numberOfPoints) const {
 
     int i = blockIdx.x * blockDim.x + threadIdx.x;
@@ -147,11 +147,11 @@ template <int blockSize> struct kernel_find_clusters {
       if (isSeed) {
         // set isSeed as 1
         d_points.isSeed[i] = 1;
-        d_seeds[0].push_back(i); // head of d_seeds
+        d_seeds[0].push_back(acc, i); // head of d_seeds
       } else {
         if (!isOutlier) {
           // register as follower at its nearest higher
-          d_followers[d_points.nearestHigher[i]].push_back(i);
+          d_followers[d_points.nearestHigher[i]].push_back(acc, i);
         }
       }
     }
@@ -161,8 +161,8 @@ template <int blockSize> struct kernel_find_clusters {
 template <int blockSize> struct kernel_assign_clusters {
   template <typename T_Acc>
   ALPAKA_FN_ACC void operator()(T_Acc const &acc,
-                                GPU::VecArray<int, maxNSeeds> *d_seeds,
-                                GPU::VecArray<int, maxNFollowers> *d_followers,
+                                GPUCupla::VecArray<int, maxNSeeds> *d_seeds,
+                                GPUCupla::VecArray<int, maxNFollowers> *d_followers,
                                 PointsPtr d_points) const {
 
     int idxCls = blockIdx.x * blockDim.x + threadIdx.x;
@@ -185,7 +185,7 @@ template <int blockSize> struct kernel_assign_clusters {
         int idxEndOflocalStack = localStack[localStackSize - 1];
 
         int temp_clusterIndex = d_points.clusterIndex[idxEndOflocalStack];
-        GPU::VecArray<int, maxNFollowers> temp_followers =
+        GPUCupla::VecArray<int, maxNFollowers> temp_followers =
             d_followers[idxEndOflocalStack];
 
         // pop_back last element of localStack
@@ -205,7 +205,8 @@ template <int blockSize> struct kernel_assign_clusters {
   }
 };
 
-void CLUEAlgoCupla::makeClusters() {
+template<>
+void CLUEAlgoCupla<Acc>::makeClusters() {
 
   // copy_todevice();
   // clear_set();

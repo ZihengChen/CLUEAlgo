@@ -7,7 +7,7 @@
 
 
 
-namespace GPU {
+namespace GPUCupla {
 
 template <class T, int maxSize> struct VecArray {
   inline constexpr int push_back_unsafe(const T &element) {
@@ -44,8 +44,9 @@ template <class T, int maxSize> struct VecArray {
 #ifdef __CUDACC__
 
   // thread-safe version of the vector, when used in a CUDA kernel
-  __device__
-  int push_back(const T &element) {
+  template<typename Acc>
+  ALPAKA_FN_ACC
+  int push_back(Acc acc, const T &element) {
     auto previousSize = atomicAdd(&m_size, 1);
     if (previousSize < maxSize) {
       m_data[previousSize] = element;
@@ -56,9 +57,9 @@ template <class T, int maxSize> struct VecArray {
     }
   }
 
-  template <class... Ts>
-  __device__
-  int emplace_back(Ts &&... args) {
+  template <typename Acc, class... Ts>
+  ALPAKA_FN_ACC
+  int emplace_back(Acc acc, Ts &&... args) {
     auto previousSize = atomicAdd(&m_size, 1);
     if (previousSize < maxSize) {
       (new (&m_data[previousSize]) T(std::forward<Ts>(args)...));

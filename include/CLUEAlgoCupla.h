@@ -2,7 +2,7 @@
 #define CLUEAlgoCupla_h
 
 
-#define DALPAKA_ACC_GPU_CUDA_ENABLED 
+#define ALPAKA_ACC_GPU_CUDA_ENABLED
 #ifndef CUPLA_HEADER_ONLY
 #   define CUPLA_HEADER_ONLY 1
 #endif
@@ -14,29 +14,36 @@
 #include "LayerTilesCupla.h"
 #include "CLUEAlgo.h"
 
-static const int maxNSeeds = 10000; 
-static const int maxNFollowers = 20; 
-static const int localStackSizePerSeed = 20; 
+using Dim = alpaka::dim::DimInt<3>;
+using Idx = std::size_t;
+using Acc = alpaka::acc::AccGpuCudaRt<Dim, Idx>;
+
+static const int maxNSeeds = 10000;
+static const int maxNFollowers = 20;
+static const int localStackSizePerSeed = 20;
 
 struct PointsPtr {
-  float *x; 
+  float *x;
   float *y ;
   int *layer ;
   float *weight ;
 
-  float *rho ; 
-  float *delta; 
+  float *rho ;
+  float *delta;
   int *nearestHigher;
-  int *clusterIndex; 
+  int *clusterIndex;
   int *isSeed;
 };
 
+template<typename Acc>
 class CLUEAlgoCupla : public CLUEAlgo {
   // inheriate from CLUEAlgo
 
   public:
     // constructor
-    CLUEAlgoCupla(float dc, float d0, float deltac, float rhoc) : CLUEAlgo(dc,d0,deltac,rhoc) {
+    CLUEAlgoCupla(const Acc & acc, float dc, float d0, float deltac, float rhoc)
+      : CLUEAlgo(dc,d0,deltac,rhoc),
+      acc_(acc) {
       init_device();
     }
     // distrcutor
@@ -53,12 +60,12 @@ class CLUEAlgoCupla : public CLUEAlgo {
 
     // #ifdef __CUDACC__
     // // CUDA functions
-
+    const Acc & acc_;
     // algorithm internal variables
     PointsPtr d_points;
-    LayerTilesCupla *d_hist;
-    GPU::VecArray<int,maxNSeeds> *d_seeds;
-    GPU::VecArray<int,maxNFollowers> *d_followers;
+    LayerTilesCupla<Acc> *d_hist;
+    GPUCupla::VecArray<int,maxNSeeds> *d_seeds;
+    GPUCupla::VecArray<int,maxNFollowers> *d_followers;
 
     // private methods
     void init_device(){
@@ -75,9 +82,9 @@ class CLUEAlgoCupla : public CLUEAlgo {
       cudaMalloc((void**)&d_points.clusterIndex, sizeof(int)*reserve);
       cudaMalloc((void**)&d_points.isSeed, sizeof(int)*reserve);
       // algorithm internal variables
-      cudaMalloc((void**)&d_hist, sizeof(LayerTilesCupla) * NLAYERS);
-      cudaMalloc((void**)&d_seeds, sizeof(GPU::VecArray<int,maxNSeeds>) );
-      cudaMalloc((void**)&d_followers, sizeof(GPU::VecArray<int,maxNFollowers>)*reserve);
+      cudaMalloc((void**)&d_hist, sizeof(LayerTilesCupla<Acc>) * NLAYERS);
+      cudaMalloc((void**)&d_seeds, sizeof(GPUCupla::VecArray<int,maxNSeeds>) );
+      cudaMalloc((void**)&d_followers, sizeof(GPUCupla::VecArray<int,maxNFollowers>)*reserve);
     }
 
     void free_device(){
@@ -114,9 +121,9 @@ class CLUEAlgoCupla : public CLUEAlgo {
       cudaMemset(d_points.clusterIndex, 0x00, sizeof(int)*points_.n);
       cudaMemset(d_points.isSeed, 0x00, sizeof(int)*points_.n);
       // algorithm internal variables
-      cudaMemset(d_hist, 0x00, sizeof(LayerTilesCupla) * NLAYERS);
-      cudaMemset(d_seeds, 0x00, sizeof(GPU::VecArray<int,maxNSeeds>));
-      cudaMemset(d_followers, 0x00, sizeof(GPU::VecArray<int,maxNFollowers>)*points_.n);
+      cudaMemset(d_hist, 0x00, sizeof(LayerTilesCupla<Acc>) * NLAYERS);
+      cudaMemset(d_seeds, 0x00, sizeof(GPUCupla::VecArray<int,maxNSeeds>));
+      cudaMemset(d_followers, 0x00, sizeof(GPUCupla::VecArray<int,maxNFollowers>)*points_.n);
     }
 
     void copy_tohost(){
