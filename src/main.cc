@@ -3,10 +3,14 @@
 #include <string>
 #include <chrono>
 #include "CLUEAlgo.h"
+#ifndef USE_CUPLA
 #include "CLUEAlgoGPU.h"
+#else
+#include "CLUEAlgoCupla.h"
+#endif
 
 void mainRun( std::string inputFileName, std::string outputFileName,
-              float dc, float deltao, float deltac, float rhoc, 
+              float dc, float deltao, float deltac, float rhoc,
               bool useGPU, int repeats, bool verbose  ) {
 
   //////////////////////////////
@@ -36,9 +40,10 @@ void mainRun( std::string inputFileName, std::string outputFileName,
 
   //////////////////////////////
   // run CLUE algorithm
-  //////////////////////////////   
-  std::cout << "Start to run CLUE algorithm" << std::endl;      
+  //////////////////////////////
+  std::cout << "Start to run CLUE algorithm" << std::endl;
   if (useGPU) {
+#ifndef USE_CUPLA
     CLUEAlgoGPU clueAlgo(dc, deltao, deltac, rhoc);
     for (int r = 0; r<repeats; r++){
       clueAlgo.setPoints(x.size(), &x[0],&y[0],&layer[0],&weight[0]);
@@ -49,8 +54,22 @@ void mainRun( std::string inputFileName, std::string outputFileName,
       std::chrono::duration<double> elapsed = finish - start;
       std::cout << "Elapsed time: " << elapsed.count() *1000 << " ms\n";
     }
-    // output result to outputFileName. -1 means all points. 
+  // output result to outputFileName. -1 means all points.
+  if (verbose) clueAlgo.verboseResults(outputFileName, -1);
+#else
+  CLUEAlgoCupla<cupla::Acc> clueAlgo(dc, deltao, deltac, rhoc);
+  for (int r = 0; r<repeats; r++){
+    clueAlgo.setPoints(x.size(), &x[0],&y[0],&layer[0],&weight[0]);
+    // measure excution time of makeClusters
+    auto start = std::chrono::high_resolution_clock::now();
+    clueAlgo.makeClusters();
+    auto finish = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> elapsed = finish - start;
+    std::cout << "Elapsed time: " << elapsed.count() *1000 << " ms\n";
+  }
+  // output result to outputFileName. -1 means all points.
     if (verbose) clueAlgo.verboseResults(outputFileName, -1);
+#endif
   } else {
     CLUEAlgo clueAlgo(dc, deltao, deltac, rhoc);
     for (int r = 0; r<repeats; r++){
@@ -62,11 +81,11 @@ void mainRun( std::string inputFileName, std::string outputFileName,
       std::chrono::duration<double> elapsed = finish - start;
       std::cout << "Elapsed time: " << elapsed.count() *1000 << " ms\n";
     }
-    // output result to outputFileName. -1 means all points. 
+    // output result to outputFileName. -1 means all points.
     if (verbose) clueAlgo.verboseResults(outputFileName, -1);
   }
-  std::cout << "Finished running CLUE algorithm" << std::endl; 
-  std::cout << std::endl; 
+  std::cout << "Finished running CLUE algorithm" << std::endl;
+  std::cout << std::endl;
 } // end of testRun()
 
 
@@ -125,7 +144,7 @@ int main(int argc, char *argv[]) {
   // MARK -- test run
   //////////////////////////////
   mainRun(inputFileName, outputFileName,
-          dc, deltao, deltac, rhoc, 
+          dc, deltao, deltac, rhoc,
           useGPU, totalNumberOfEvent,verbose);
 
   return 0;

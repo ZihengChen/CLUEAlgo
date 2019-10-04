@@ -44,11 +44,17 @@ if __name__ == '__main__':
       type = bool,
       help = "Run in verbose mode",
       default = False)
+  parser.add_argument('-b', '--binary',
+      action = 'store',
+      type = str,
+      help = "Executable to run",
+      default = "main")
 
   args = parser.parse_args()
 
-  out_ = commands.getoutput("./main %s %f %f %f %f %d %d %d" % (
-    (args.file,
+  out_ = commands.getoutput("./%s %s %f %f %f %f %d %d %d" % (
+    (args.binary,
+      args.file,
       args.dc,
       args.deltao,
       args.deltac,

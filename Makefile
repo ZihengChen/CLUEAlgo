@@ -35,17 +35,20 @@ ALL_LDFLAGS += $(addprefix -Xlinker ,$(LDFLAGS))
 ALL_LDFLAGS += $(addprefix -Xlinker ,$(EXTRA_LDFLAGS))
 
 
+TBB_BASE := /home/cmssw/slc7_amd64_gcc820/external/tbb/2019_U8
 # Common includes and paths for CUDA
-INCLUDES  := -I../../common/inc -I include -I cupla/include -I cupla/alpaka/include
-LIBRARIES :=
-CUPLA_CUDA_ASYNC     := -DCUPLA_STREAM_ASYNC_ENABLED=1 
+INCLUDES   := -I../../common/inc -I include -I cupla/include -I cupla/alpaka/include
+LIBRARIES  :=
+CUPLA_CUDA_ACC := -DFOR_CUDA
+CUPLA_CPUTBB_ACC := -DFOR_TBB -I $(TBB_BASE)/include -L $(TBB_BASE)/lib -ltbb
 
 CUDA_FLAGS := -x cu
+CUPLA_FLAGS := -DUSE_CUPLA
 
 ################################################################################
 
 # Gencode arguments
-SMS ?= 30 35 37 50 52 60 61 70 75
+SMS ?= 60 70 75
 
 ifeq ($(SMS),)
 $(info >>> WARNING - no SM architectures have been specified - waiving sample <<<)
@@ -66,13 +69,10 @@ endif
 # Target rules
 all: build
 
-build: main
+build: main mainCuplaCUDA mainCuplaCPUSerial mainCuplaCPUTBB
 
 CLUEAlgo.o:src/CLUEAlgo.cc
 	$(EXEC) $(NVCC) $(INCLUDES) $(ALL_CCFLAGS) $(GENCODE_FLAGS) -o $@ -c $<
-
-CLUEAlgoCupla.o:src/CLUEAlgoCupla.cc
-	$(EXEC) $(NVCC) $(INCLUDES) $(ALL_CCFLAGS) $(CUDA_FLAGS) $(CUPLA_CUDA_ASYNC) -o $@ -c $<
 
 CLUEAlgoGPU.o:src/CLUEAlgoGPU.cu
 	$(EXEC) $(NVCC) $(INCLUDES) $(ALL_CCFLAGS) $(GENCODE_FLAGS) -o $@ -c $<
@@ -80,13 +80,31 @@ CLUEAlgoGPU.o:src/CLUEAlgoGPU.cu
 main.o:src/main.cc
 	$(EXEC) $(NVCC) $(INCLUDES) $(ALL_CCFLAGS) $(GENCODE_FLAGS) -o $@ -c $<
 
-main: main.o CLUEAlgoGPU.o CLUEAlgo.o CLUEAlgoCupla.o
+mainCuplaCUDA.o:src/main.cc
+	$(EXEC) $(NVCC) $(INCLUDES) $(ALL_CCFLAGS) $(CUDA_FLAGS) $(CUPLA_CUDA_ACC) $(GENCODE_FLAGS) $(CUPLA_FLAGS) -o $@ -c $<
+
+mainCuplaCPUSerial.o:src/main.cc
+	$(EXEC) $(NVCC) $(INCLUDES) $(ALL_CCFLAGS) $(CUDA_FLAGS) $(CUPLA_CPUSERIAL_ACC) $(GENCODE_FLAGS) $(CUPLA_FLAGS) -o $@ -c $<
+
+mainCuplaCPUTBB.o:src/main.cc
+	$(EXEC) $(NVCC) $(INCLUDES) $(ALL_CCFLAGS) $(CUDA_FLAGS) $(CUPLA_CPUTBB_ACC) $(GENCODE_FLAGS) $(CUPLA_FLAGS) -o $@ -c $<
+
+main: main.o CLUEAlgoGPU.o CLUEAlgo.o
 	$(EXEC) $(NVCC) $(ALL_LDFLAGS) $(GENCODE_FLAGS) -o $@ $+ $(LIBRARIES)
+
+mainCuplaCUDA: mainCuplaCUDA.o include/CLUEAlgoCupla.h CLUEAlgo.o
+	$(EXEC) $(NVCC) $(ALL_LDFLAGS) $(GENCODE_FLAGS) -o $@ mainCuplaCUDA.o CLUEAlgo.o $(LIBRARIES)
+
+mainCuplaCPUSerial: mainCuplaCPUSerial.o include/CLUEAlgoCupla.h CLUEAlgo.o
+	$(EXEC) $(NVCC) $(ALL_LDFLAGS) $(GENCODE_FLAGS) -o $@ mainCuplaCPUSerial.o CLUEAlgo.o $(LIBRARIES) $(CUPLA_CPUSERIAL_ACC)
+
+mainCuplaCPUTBB: mainCuplaCPUTBB.o include/CLUEAlgoCupla.h CLUEAlgo.o
+	$(EXEC) $(NVCC) $(ALL_LDFLAGS) $(GENCODE_FLAGS) -o $@ mainCuplaCPUTBB.o CLUEAlgo.o $(LIBRARIES) $(CUPLA_CPUTBB_ACC)
 
 run: build
 	$(EXEC) main
 
 clean:
-	rm -f main main.o CLUEAlgo.o CLUEAlgoGPU.o CLUEAlgoCupla.o
+	rm -f main main.o mainCupla mainCupla.o mainCuplaCUDA mainCuplaCUDA.o mainCuplaCPUSerial mainCuplaCPUSerial.o mainCuplaCPUTBB mainCuplaCPUTBB.o CLUEAlgo.o CLUEAlgoGPU.o
 
 clobber: clean
