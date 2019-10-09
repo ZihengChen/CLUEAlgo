@@ -14,7 +14,7 @@
 
 
 __global__ void kernel_compute_histogram( LayerTilesGPU *d_hist, 
-                                          PointsPtr d_points, 
+                                          const PointsPtr d_points, 
                                           int numberOfPoints
                                           )
 {
@@ -60,7 +60,7 @@ __global__ void kernel_compute_density( LayerTilesGPU *d_hist,
           float dist_ij = std::sqrt((xi-xj)*(xi-xj) + (yi-yj)*(yi-yj));
           if(dist_ij <= dc) { 
             // sum weights within N_{dc_}(i)
-            rhoi += d_points.weight[j];              
+            rhoi += d_points.weight[j];
           }
         } // end of interate inside this bin
       }
@@ -150,6 +150,8 @@ __global__ void kernel_find_clusters( GPU::VecArray<int,maxNSeeds>* d_seeds,
       d_seeds[0].push_back(i); // head of d_seeds
     } else {
       if (!isOutlier) {
+        assert(d_points.nearestHigher[i] < numberOfPoints);
+        
         // register as follower at its nearest higher
         d_followers[d_points.nearestHigher[i]].push_back(i);  
       }
@@ -158,41 +160,38 @@ __global__ void kernel_find_clusters( GPU::VecArray<int,maxNSeeds>* d_seeds,
 } //kernel
 
 
-__global__ void kernel_assign_clusters( GPU::VecArray<int,maxNSeeds>* d_seeds, 
-                                        GPU::VecArray<int,maxNFollowers>* d_followers,
-                                        PointsPtr d_points
-                                        )
+__global__ void kernel_assign_clusters( const GPU::VecArray<int,maxNSeeds>* d_seeds, 
+                                        const GPU::VecArray<int,maxNFollowers>* d_followers,
+                                        PointsPtr d_points, int numberOfPoints)
 {
 
   int idxCls = blockIdx.x * blockDim.x + threadIdx.x;
-
-  if (idxCls < d_seeds[0].size()){
+  const auto& seeds = d_seeds[0];
+  const auto nSeeds = seeds.size();
+  if (idxCls < nSeeds){
 
     int localStack[localStackSizePerSeed] = {-1};
     int localStackSize = 0;
 
     // asgine cluster to seed[idxCls]
-    int idxThisSeed = d_seeds[0][idxCls];
+    int idxThisSeed = seeds[idxCls];
     d_points.clusterIndex[idxThisSeed] = idxCls;
     // push_back idThisSeed to localStack
     localStack[localStackSize] = idxThisSeed;
     localStackSize++;
-
     // process all elements in localStack
     while (localStackSize>0){
       // get last element of localStack
       int idxEndOflocalStack = localStack[localStackSize-1];
 
       int temp_clusterIndex = d_points.clusterIndex[idxEndOflocalStack];
-      GPU::VecArray<int,maxNFollowers> temp_followers = d_followers[idxEndOflocalStack];
-              
       // pop_back last element of localStack
       localStack[localStackSize-1] = -1;
       localStackSize--;
-
+      
       // loop over followers of last element of localStack
-      for( int j : temp_followers){
-        // pass id to follower
+      for( int j : d_followers[idxEndOflocalStack]){
+        // // pass id to follower
         d_points.clusterIndex[j] = temp_clusterIndex;
         // push_back follower to localStack
         localStack[localStackSize] = j;
@@ -228,7 +227,7 @@ void CLUEAlgoGPU::makeClusters( ) {
   // 1 point per seeds
   ////////////////////////////////////////////
   const dim3 gridSize_nseeds(ceil(maxNSeeds/1024.0),1,1);
-  kernel_assign_clusters <<<gridSize_nseeds,blockSize>>>(d_seeds, d_followers, d_points);
+  kernel_assign_clusters <<<gridSize_nseeds,blockSize>>>(d_seeds, d_followers, d_points, points_.n);
 
   copy_tohost();
 }
