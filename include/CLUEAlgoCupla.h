@@ -301,15 +301,15 @@ struct kernel_assign_clusters {
         int idxEndOflocalStack = localStack[localStackSize - 1];
 
         int temp_clusterIndex = d_points.clusterIndex[idxEndOflocalStack];
-        GPUCupla::VecArray<int, maxNFollowersCupla> temp_followers =
-            d_followers[idxEndOflocalStack];
+        
+            
 
         // pop_back last element of localStack
         localStack[localStackSize - 1] = -1;
         localStackSize--;
 
         // loop over followers of last element of localStack
-        for (int j : temp_followers) {
+        for (int j : d_followers[idxEndOflocalStack]) {
           // pass id to follower
           d_points.clusterIndex[j] = temp_clusterIndex;
           // push_back follower to localStack
