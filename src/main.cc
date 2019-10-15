@@ -137,6 +137,8 @@ int main(int argc, char *argv[]) {
   outputFileName.append(underscore);
   outputFileName.append(std::to_string(int(rhoc)));
   outputFileName.append(suffix);
+  outputFileName.append(std::to_string(int(useGPU)));
+  outputFileName.append(suffix);
   std::cout << "output file " << outputFileName << std::endl;
 
 

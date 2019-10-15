@@ -1,0 +1,413 @@
+----------------
+running with GPU
+----------------
+input file data/input/toyDetector_1000.csv
+output file data/output/toyDetector_1000_3_5_5_8.csv
+Start to load input points
+Finished loading input points
+Start to run CLUE algorithm
+==31396== NVPROF is profiling process 31396, command: ./main toyDetector_1000 3 5 5 8 1 10 0
+Elapsed time: 0.240032 ms
+Elapsed time: 0.225594 ms
+Elapsed time: 0.214393 ms
+Elapsed time: 0.204083 ms
+Elapsed time: 0.21258 ms
+Elapsed time: 0.205857 ms
+Elapsed time: 0.205496 ms
+Elapsed time: 0.212148 ms
+Elapsed time: 0.204434 ms
+Elapsed time: 0.216627 ms
+Finished running CLUE algorithm
+
+==31396== Profiling application: ./main toyDetector_1000 3 5 5 8 1 10 0
+==31396== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:   34.13%  315.87us        10  31.587us  31.200us  31.808us  kernel_compute_density(LayerTilesGPU*, PointsPtr, float, int)
+                   31.89%  295.20us        10  29.520us  28.416us  30.560us  kernel_compute_distanceToHigher(LayerTilesGPU*, PointsPtr, float, int)
+                    8.35%  77.312us        80     966ns     768ns  1.3440us  [CUDA memset]
+                    7.65%  70.783us        10  7.0780us  6.8800us  7.8400us  kernel_assign_clusters(GPU::VecArray<int, int=10000> const *, GPU::VecArray<int, int=20> const *, PointsPtr, int)
+                    6.43%  59.488us        50  1.1890us  1.1200us  1.4080us  [CUDA memcpy DtoH]
+                    4.57%  42.304us        40  1.0570us  1.0240us  1.2480us  [CUDA memcpy HtoD]
+                    3.53%  32.671us        10  3.2670us  3.1680us  3.4880us  kernel_compute_histogram(LayerTilesGPU*, PointsPtr, int)
+                    3.45%  31.968us        10  3.1960us  3.1360us  3.4880us  kernel_find_clusters(GPU::VecArray<int, int=10000>*, GPU::VecArray<int, int=20>*, PointsPtr, float, float, float, int)
+      API calls:   98.07%  232.73ms        12  19.394ms  5.9720us  231.65ms  cudaMalloc
+                    0.57%  1.3464ms        90  14.959us  5.9920us  71.945us  cudaMemcpy
+                    0.46%  1.0885ms        12  90.704us  6.2820us  142.27us  cudaFree
+                    0.33%  790.37us        97  8.1480us     330ns  347.23us  cuDeviceGetAttribute
+                    0.22%  516.62us         1  516.62us  516.62us  516.62us  cuDeviceTotalMem
+                    0.18%  417.64us        80  5.2200us  2.8360us  26.580us  cudaMemset
+                    0.13%  318.17us        50  6.3630us  5.3000us  25.187us  cudaLaunchKernel
+                    0.04%  92.824us         1  92.824us  92.824us  92.824us  cuDeviceGetName
+                    0.00%  2.6450us         1  2.6450us  2.6450us  2.6450us  cuDeviceGetPCIBusId
+                    0.00%  2.0530us         3     684ns     270ns  1.1220us  cuDeviceGetCount
+                    0.00%  1.4130us         2     706ns     381ns  1.0320us  cuDeviceGet
+                    0.00%     541ns         1     541ns     541ns     541ns  cuDeviceGetUuid
+input file data/input/toyDetector_2000.csv
+output file data/output/toyDetector_2000_3_5_5_8.csv
+Start to load input points
+Finished loading input points
+Start to run CLUE algorithm
+==31415== NVPROF is profiling process 31415, command: ./main toyDetector_2000 3 5 5 8 1 10 0
+Elapsed time: 0.283012 ms
+Elapsed time: 0.252555 ms
+Elapsed time: 0.249239 ms
+Elapsed time: 0.246574 ms
+Elapsed time: 0.250421 ms
+Elapsed time: 0.248427 ms
+Elapsed time: 0.246013 ms
+Elapsed time: 0.246713 ms
+Elapsed time: 0.249489 ms
+Elapsed time: 0.251262 ms
+Finished running CLUE algorithm
+
+==31415== Profiling application: ./main toyDetector_2000 3 5 5 8 1 10 0
+==31415== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:   33.46%  361.70us        10  36.169us  35.648us  36.896us  kernel_compute_density(LayerTilesGPU*, PointsPtr, float, int)
+                   31.24%  337.63us        10  33.763us  32.800us  34.560us  kernel_compute_distanceToHigher(LayerTilesGPU*, PointsPtr, float, int)
+                   10.85%  117.28us        10  11.728us  11.296us  12.512us  kernel_assign_clusters(GPU::VecArray<int, int=10000> const *, GPU::VecArray<int, int=20> const *, PointsPtr, int)
+                    7.45%  80.576us        50  1.6110us  1.5360us  1.8560us  [CUDA memcpy DtoH]
+                    5.99%  64.704us        80     808ns     768ns  1.1200us  [CUDA memset]
+                    4.65%  50.240us        40  1.2560us  1.2160us  1.6000us  [CUDA memcpy HtoD]
+                    3.31%  35.776us        10  3.5770us  3.4240us  3.8720us  kernel_compute_histogram(LayerTilesGPU*, PointsPtr, int)
+                    3.05%  32.961us        10  3.2960us  3.2320us  3.4240us  kernel_find_clusters(GPU::VecArray<int, int=10000>*, GPU::VecArray<int, int=20>*, PointsPtr, float, float, float, int)
+      API calls:   96.61%  130.54ms        12  10.878ms  6.0910us  129.39ms  cudaMalloc
+                    1.16%  1.5688ms        90  17.431us  6.4320us  83.968us  cudaMemcpy
+                    0.81%  1.0898ms        12  90.813us  6.4420us  142.75us  cudaFree
+                    0.42%  564.81us        80  7.0600us  6.0410us  21.190us  cudaMemset
+                    0.42%  561.12us        97  5.7840us     290ns  244.76us  cuDeviceGetAttribute
+                    0.29%  396.86us         1  396.86us  396.86us  396.86us  cuDeviceTotalMem
+                    0.24%  326.33us        50  6.5260us  5.5300us  29.165us  cudaLaunchKernel
+                    0.05%  63.370us         1  63.370us  63.370us  63.370us  cuDeviceGetName
+                    0.00%  2.3250us         1  2.3250us  2.3250us  2.3250us  cuDeviceGetPCIBusId
+                    0.00%  2.0650us         3     688ns     311ns  1.2530us  cuDeviceGetCount
+                    0.00%  1.3420us         2     671ns     370ns     972ns  cuDeviceGet
+                    0.00%     411ns         1     411ns     411ns     411ns  cuDeviceGetUuid
+input file data/input/toyDetector_3000.csv
+output file data/output/toyDetector_3000_3_5_5_8.csv
+Start to load input points
+Finished loading input points
+Start to run CLUE algorithm
+==31431== NVPROF is profiling process 31431, command: ./main toyDetector_3000 3 5 5 8 1 10 0
+Elapsed time: 0.308259 ms
+Elapsed time: 0.26626 ms
+Elapsed time: 0.263155 ms
+Elapsed time: 0.26072 ms
+Elapsed time: 0.261932 ms
+Elapsed time: 0.261101 ms
+Elapsed time: 0.260871 ms
+Elapsed time: 0.26039 ms
+Elapsed time: 0.26051 ms
+Elapsed time: 0.262614 ms
+Finished running CLUE algorithm
+
+==31431== Profiling application: ./main toyDetector_3000 3 5 5 8 1 10 0
+==31431== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:   32.50%  394.62us        10  39.462us  38.720us  40.672us  kernel_compute_distanceToHigher(LayerTilesGPU*, PointsPtr, float, int)
+                   32.14%  390.34us        10  39.033us  38.688us  39.584us  kernel_compute_density(LayerTilesGPU*, PointsPtr, float, int)
+                   10.57%  128.32us        10  12.832us  12.256us  13.888us  kernel_assign_clusters(GPU::VecArray<int, int=10000> const *, GPU::VecArray<int, int=20> const *, PointsPtr, int)
+                    9.00%  109.28us        50  2.1850us  2.1120us  2.4320us  [CUDA memcpy DtoH]
+                    5.29%  64.224us        80     802ns     768ns  1.1520us  [CUDA memset]
+                    4.69%  56.960us        40  1.4240us  1.4080us  1.6320us  [CUDA memcpy HtoD]
+                    3.05%  37.057us        10  3.7050us  3.4880us  4.0640us  kernel_compute_histogram(LayerTilesGPU*, PointsPtr, int)
+                    2.76%  33.536us        10  3.3530us  3.2640us  3.6160us  kernel_find_clusters(GPU::VecArray<int, int=10000>*, GPU::VecArray<int, int=20>*, PointsPtr, float, float, float, int)
+      API calls:   96.38%  126.32ms        12  10.527ms  5.9710us  125.25ms  cudaMalloc
+                    1.31%  1.7174ms        90  19.082us  6.5820us  90.720us  cudaMemcpy
+                    0.83%  1.0938ms        12  91.151us  6.1810us  144.25us  cudaFree
+                    0.44%  580.65us        97  5.9860us     260ns  251.73us  cuDeviceGetAttribute
+                    0.43%  567.08us        80  7.0880us  5.9720us  23.024us  cudaMemset
+                    0.30%  397.81us         1  397.81us  397.81us  397.81us  cuDeviceTotalMem
+                    0.24%  319.61us        50  6.3920us  5.3400us  28.443us  cudaLaunchKernel
+                    0.05%  63.079us         1  63.079us  63.079us  63.079us  cuDeviceGetName
+                    0.00%  2.8050us         1  2.8050us  2.8050us  2.8050us  cuDeviceGetPCIBusId
+                    0.00%  1.9240us         3     641ns     281ns  1.1420us  cuDeviceGetCount
+                    0.00%  1.2720us         2     636ns     310ns     962ns  cuDeviceGet
+                    0.00%     440ns         1     440ns     440ns     440ns  cuDeviceGetUuid
+input file data/input/toyDetector_4000.csv
+output file data/output/toyDetector_4000_3_5_5_8.csv
+Start to load input points
+Finished loading input points
+Start to run CLUE algorithm
+==31447== NVPROF is profiling process 31447, command: ./main toyDetector_4000 3 5 5 8 1 10 0
+Elapsed time: 0.333798 ms
+Elapsed time: 0.299423 ms
+Elapsed time: 0.292449 ms
+Elapsed time: 0.291638 ms
+Elapsed time: 0.295465 ms
+Elapsed time: 0.296357 ms
+Elapsed time: 0.29294 ms
+Elapsed time: 0.290796 ms
+Elapsed time: 0.295786 ms
+Elapsed time: 0.300605 ms
+Finished running CLUE algorithm
+
+==31447== Profiling application: ./main toyDetector_4000 3 5 5 8 1 10 0
+==31447== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:   31.40%  469.73us        10  46.972us  46.368us  47.808us  kernel_compute_distanceToHigher(LayerTilesGPU*, PointsPtr, float, int)
+                   28.51%  426.53us        10  42.652us  42.305us  43.072us  kernel_compute_density(LayerTilesGPU*, PointsPtr, float, int)
+                   17.15%  256.48us        10  25.648us  24.544us  27.552us  kernel_assign_clusters(GPU::VecArray<int, int=10000> const *, GPU::VecArray<int, int=20> const *, PointsPtr, int)
+                    9.41%  140.77us        50  2.8150us  2.7200us  3.1680us  [CUDA memcpy DtoH]
+                    4.34%  64.864us        40  1.6210us  1.5680us  1.9520us  [CUDA memcpy HtoD]
+                    4.30%  64.256us        80     803ns     768ns  1.1200us  [CUDA memset]
+                    2.55%  38.208us        10  3.8200us  3.5200us  4.0640us  kernel_compute_histogram(LayerTilesGPU*, PointsPtr, int)
+                    2.34%  35.040us        10  3.5040us  3.3600us  3.9040us  kernel_find_clusters(GPU::VecArray<int, int=10000>*, GPU::VecArray<int, int=20>*, PointsPtr, float, float, float, int)
+      API calls:   96.08%  123.72ms        12  10.310ms  6.3310us  122.61ms  cudaMalloc
+                    1.60%  2.0652ms        90  22.946us  7.0640us  120.66us  cudaMemcpy
+                    0.85%  1.0973ms        12  91.438us  6.0510us  149.05us  cudaFree
+                    0.43%  550.68us        80  6.8830us  5.8810us  22.332us  cudaMemset
+                    0.42%  546.36us        97  5.6320us     251ns  239.94us  cuDeviceGetAttribute
+                    0.31%  397.08us         1  397.08us  397.08us  397.08us  cuDeviceTotalMem
+                    0.24%  313.96us        50  6.2790us  5.2600us  28.764us  cudaLaunchKernel
+                    0.05%  62.828us         1  62.828us  62.828us  62.828us  cuDeviceGetName
+                    0.01%  8.6360us         2  4.3180us     320ns  8.3160us  cuDeviceGet
+                    0.00%  2.4550us         1  2.4550us  2.4550us  2.4550us  cuDeviceGetPCIBusId
+                    0.00%  1.9840us         3     661ns     341ns  1.0920us  cuDeviceGetCount
+                    0.00%     421ns         1     421ns     421ns     421ns  cuDeviceGetUuid
+input file data/input/toyDetector_5000.csv
+output file data/output/toyDetector_5000_3_5_5_8.csv
+Start to load input points
+Finished loading input points
+Start to run CLUE algorithm
+==31463== NVPROF is profiling process 31463, command: ./main toyDetector_5000 3 5 5 8 1 10 0
+Elapsed time: 0.353294 ms
+Elapsed time: 0.317767 ms
+Elapsed time: 0.320132 ms
+Elapsed time: 0.319791 ms
+Elapsed time: 0.312408 ms
+Elapsed time: 0.314842 ms
+Elapsed time: 0.31915 ms
+Elapsed time: 0.318529 ms
+Elapsed time: 0.312587 ms
+Elapsed time: 0.316565 ms
+Finished running CLUE algorithm
+
+==31463== Profiling application: ./main toyDetector_5000 3 5 5 8 1 10 0
+==31463== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:   30.05%  503.71us        10  50.371us  49.440us  51.008us  kernel_compute_distanceToHigher(LayerTilesGPU*, PointsPtr, float, int)
+                   28.15%  471.84us        10  47.184us  46.656us  47.744us  kernel_compute_density(LayerTilesGPU*, PointsPtr, float, int)
+                   18.96%  317.76us        10  31.776us  30.432us  33.920us  kernel_assign_clusters(GPU::VecArray<int, int=10000> const *, GPU::VecArray<int, int=20> const *, PointsPtr, int)
+                   10.15%  170.08us        50  3.4010us  3.3280us  3.5840us  [CUDA memcpy DtoH]
+                    4.27%  71.584us        40  1.7890us  1.7600us  2.1760us  [CUDA memcpy HtoD]
+                    3.82%  64.000us        80     800ns     768ns  1.0880us  [CUDA memset]
+                    2.45%  40.992us        10  4.0990us  3.9680us  4.3520us  kernel_compute_histogram(LayerTilesGPU*, PointsPtr, int)
+                    2.16%  36.192us        10  3.6190us  3.4880us  4.2240us  kernel_find_clusters(GPU::VecArray<int, int=10000>*, GPU::VecArray<int, int=20>*, PointsPtr, float, float, float, int)
+      API calls:   95.94%  124.04ms        12  10.336ms  5.9410us  122.97ms  cudaMalloc
+                    1.73%  2.2397ms        90  24.885us  7.5440us  136.16us  cudaMemcpy
+                    0.85%  1.0970ms        12  91.420us  6.1920us  143.68us  cudaFree
+                    0.43%  551.37us        80  6.8920us  5.8510us  21.531us  cudaMemset
+                    0.42%  545.51us        97  5.6230us     250ns  239.19us  cuDeviceGetAttribute
+                    0.31%  395.72us         1  395.72us  395.72us  395.72us  cuDeviceTotalMem
+                    0.27%  352.16us        50  7.0430us  5.3600us  34.485us  cudaLaunchKernel
+                    0.05%  62.377us         1  62.377us  62.377us  62.377us  cuDeviceGetName
+                    0.00%  2.5650us         1  2.5650us  2.5650us  2.5650us  cuDeviceGetPCIBusId
+                    0.00%  1.8630us         3     621ns     360ns  1.0920us  cuDeviceGetCount
+                    0.00%  1.1830us         2     591ns     321ns     862ns  cuDeviceGet
+                    0.00%     401ns         1     401ns     401ns     401ns  cuDeviceGetUuid
+input file data/input/toyDetector_6000.csv
+output file data/output/toyDetector_6000_3_5_5_8.csv
+Start to load input points
+Finished loading input points
+Start to run CLUE algorithm
+==31479== NVPROF is profiling process 31479, command: ./main toyDetector_6000 3 5 5 8 1 10 0
+Elapsed time: 0.3722 ms
+Elapsed time: 0.325733 ms
+Elapsed time: 0.326123 ms
+Elapsed time: 0.326263 ms
+Elapsed time: 0.324711 ms
+Elapsed time: 0.322406 ms
+Elapsed time: 0.327276 ms
+Elapsed time: 0.319841 ms
+Elapsed time: 0.323107 ms
+Elapsed time: 0.338596 ms
+Finished running CLUE algorithm
+
+==31479== Profiling application: ./main toyDetector_6000 3 5 5 8 1 10 0
+==31479== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:   29.61%  505.09us        10  50.509us  48.160us  51.489us  kernel_compute_distanceToHigher(LayerTilesGPU*, PointsPtr, float, int)
+                   27.36%  466.66us        10  46.665us  45.472us  48.032us  kernel_compute_density(LayerTilesGPU*, PointsPtr, float, int)
+                   18.12%  309.06us        10  30.905us  30.240us  31.808us  kernel_assign_clusters(GPU::VecArray<int, int=10000> const *, GPU::VecArray<int, int=20> const *, PointsPtr, int)
+                   11.68%  199.17us        50  3.9830us  3.8720us  4.2880us  [CUDA memcpy DtoH]
+                    4.62%  78.848us        40  1.9710us  1.9520us  2.3040us  [CUDA memcpy HtoD]
+                    3.79%  64.672us        80     808ns     768ns  1.1200us  [CUDA memset]
+                    2.56%  43.648us        10  4.3640us  4.0960us  4.8000us  kernel_compute_histogram(LayerTilesGPU*, PointsPtr, int)
+                    2.27%  38.688us        10  3.8680us  3.6800us  4.1280us  kernel_find_clusters(GPU::VecArray<int, int=10000>*, GPU::VecArray<int, int=20>*, PointsPtr, float, float, float, int)
+      API calls:   95.85%  124.29ms        12  10.357ms  6.2010us  123.19ms  cudaMalloc
+                    1.82%  2.3612ms        90  26.235us  7.5740us  136.03us  cudaMemcpy
+                    0.85%  1.1019ms        12  91.825us  6.1220us  149.27us  cudaFree
+                    0.43%  563.84us        80  7.0470us  5.9820us  23.324us  cudaMemset
+                    0.43%  562.23us        97  5.7960us     250ns  247.85us  cuDeviceGetAttribute
+                    0.31%  396.68us         1  396.68us  396.68us  396.68us  cuDeviceTotalMem
+                    0.25%  319.75us        50  6.3950us  5.3810us  29.966us  cudaLaunchKernel
+                    0.05%  62.828us         1  62.828us  62.828us  62.828us  cuDeviceGetName
+                    0.00%  2.7550us         1  2.7550us  2.7550us  2.7550us  cuDeviceGetPCIBusId
+                    0.00%  1.9330us         3     644ns     260ns  1.1420us  cuDeviceGetCount
+                    0.00%  1.2520us         2     626ns     310ns     942ns  cuDeviceGet
+                    0.00%     391ns         1     391ns     391ns     391ns  cuDeviceGetUuid
+input file data/input/toyDetector_7000.csv
+output file data/output/toyDetector_7000_3_5_5_8.csv
+Start to load input points
+Finished loading input points
+Start to run CLUE algorithm
+==31498== NVPROF is profiling process 31498, command: ./main toyDetector_7000 3 5 5 8 1 10 0
+Elapsed time: 0.393861 ms
+Elapsed time: 0.350548 ms
+Elapsed time: 0.344618 ms
+Elapsed time: 0.343406 ms
+Elapsed time: 0.348906 ms
+Elapsed time: 0.345509 ms
+Elapsed time: 0.344307 ms
+Elapsed time: 0.352132 ms
+Elapsed time: 0.349357 ms
+Elapsed time: 0.349487 ms
+Finished running CLUE algorithm
+
+==31498== Profiling application: ./main toyDetector_7000 3 5 5 8 1 10 0
+==31498== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:   27.93%  530.02us        10  53.001us  52.096us  53.760us  kernel_compute_distanceToHigher(LayerTilesGPU*, PointsPtr, float, int)
+                   25.99%  493.22us        10  49.321us  48.896us  49.856us  kernel_compute_density(LayerTilesGPU*, PointsPtr, float, int)
+                   21.60%  409.92us        10  40.992us  39.584us  42.144us  kernel_assign_clusters(GPU::VecArray<int, int=10000> const *, GPU::VecArray<int, int=20> const *, PointsPtr, int)
+                   12.08%  229.28us        50  4.5850us  4.4800us  5.0240us  [CUDA memcpy DtoH]
+                    4.54%  86.176us        40  2.1540us  2.1120us  2.4640us  [CUDA memcpy HtoD]
+                    3.37%  63.968us        80     799ns     768ns  1.0560us  [CUDA memset]
+                    2.42%  45.984us        10  4.5980us  4.3840us  4.7360us  kernel_compute_histogram(LayerTilesGPU*, PointsPtr, int)
+                    2.07%  39.200us        10  3.9200us  3.7120us  4.0960us  kernel_find_clusters(GPU::VecArray<int, int=10000>*, GPU::VecArray<int, int=20>*, PointsPtr, float, float, float, int)
+      API calls:   95.68%  123.82ms        12  10.318ms  5.9010us  122.71ms  cudaMalloc
+                    1.99%  2.5812ms        90  28.679us  8.1550us  152.03us  cudaMemcpy
+                    0.85%  1.1037ms        12  91.972us  6.3820us  149.04us  cudaFree
+                    0.43%  556.74us        80  6.9590us  5.9710us  22.242us  cudaMemset
+                    0.42%  546.29us        97  5.6310us     260ns  239.33us  cuDeviceGetAttribute
+                    0.31%  407.47us         1  407.47us  407.47us  407.47us  cuDeviceTotalMem
+                    0.25%  320.85us        50  6.4170us  5.4010us  28.503us  cudaLaunchKernel
+                    0.05%  63.239us         1  63.239us  63.239us  63.239us  cuDeviceGetName
+                    0.00%  2.8650us         1  2.8650us  2.8650us  2.8650us  cuDeviceGetPCIBusId
+                    0.00%  1.9940us         3     664ns     280ns  1.2130us  cuDeviceGetCount
+                    0.00%  1.1530us         2     576ns     301ns     852ns  cuDeviceGet
+                    0.00%     401ns         1     401ns     401ns     401ns  cuDeviceGetUuid
+input file data/input/toyDetector_8000.csv
+output file data/output/toyDetector_8000_3_5_5_8.csv
+Start to load input points
+Finished loading input points
+Start to run CLUE algorithm
+==31514== NVPROF is profiling process 31514, command: ./main toyDetector_8000 3 5 5 8 1 10 0
+Elapsed time: 0.402486 ms
+Elapsed time: 0.366328 ms
+Elapsed time: 0.361018 ms
+Elapsed time: 0.359655 ms
+Elapsed time: 0.364154 ms
+Elapsed time: 0.362551 ms
+Elapsed time: 0.364445 ms
+Elapsed time: 0.359736 ms
+Elapsed time: 0.37763 ms
+Elapsed time: 0.366889 ms
+Finished running CLUE algorithm
+
+==31514== Profiling application: ./main toyDetector_8000 3 5 5 8 1 10 0
+==31514== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:   28.47%  570.30us        10  57.030us  56.064us  58.048us  kernel_compute_distanceToHigher(LayerTilesGPU*, PointsPtr, float, int)
+                   25.78%  516.45us        10  51.644us  51.104us  52.256us  kernel_compute_density(LayerTilesGPU*, PointsPtr, float, int)
+                   20.35%  407.71us        10  40.771us  39.360us  42.336us  kernel_assign_clusters(GPU::VecArray<int, int=10000> const *, GPU::VecArray<int, int=20> const *, PointsPtr, int)
+                   12.84%  257.25us        50  5.1440us  5.0560us  5.4720us  [CUDA memcpy DtoH]
+                    4.68%  93.729us        40  2.3430us  2.3040us  2.6560us  [CUDA memcpy HtoD]
+                    3.21%  64.320us        80     804ns     768ns  1.0880us  [CUDA memset]
+                    2.61%  52.385us        10  5.2380us  4.6720us  5.5680us  kernel_compute_histogram(LayerTilesGPU*, PointsPtr, int)
+                    2.06%  41.344us        10  4.1340us  4.0000us  4.3840us  kernel_find_clusters(GPU::VecArray<int, int=10000>*, GPU::VecArray<int, int=20>*, PointsPtr, float, float, float, int)
+      API calls:   95.67%  127.41ms        12  10.618ms  6.1620us  126.32ms  cudaMalloc
+                    2.05%  2.7310ms        90  30.344us  8.0150us  159.08us  cudaMemcpy
+                    0.82%  1.0915ms        12  90.959us  6.1320us  142.83us  cudaFree
+                    0.43%  576.79us        97  5.9460us     270ns  250.91us  cuDeviceGetAttribute
+                    0.43%  572.16us        80  7.1510us  6.1210us  22.712us  cudaMemset
+                    0.31%  406.99us         1  406.99us  406.99us  406.99us  cuDeviceTotalMem
+                    0.24%  318.77us        50  6.3750us  5.4000us  25.668us  cudaLaunchKernel
+                    0.05%  63.499us         1  63.499us  63.499us  63.499us  cuDeviceGetName
+                    0.00%  2.5950us         1  2.5950us  2.5950us  2.5950us  cuDeviceGetPCIBusId
+                    0.00%  2.0740us         3     691ns     341ns  1.2420us  cuDeviceGetCount
+                    0.00%  1.1630us         2     581ns     331ns     832ns  cuDeviceGet
+                    0.00%     481ns         1     481ns     481ns     481ns  cuDeviceGetUuid
+input file data/input/toyDetector_9000.csv
+output file data/output/toyDetector_9000_3_5_5_8.csv
+Start to load input points
+Finished loading input points
+Start to run CLUE algorithm
+==31530== NVPROF is profiling process 31530, command: ./main toyDetector_9000 3 5 5 8 1 10 0
+Elapsed time: 0.44137 ms
+Elapsed time: 0.381066 ms
+Elapsed time: 0.376597 ms
+Elapsed time: 0.381578 ms
+Elapsed time: 0.377981 ms
+Elapsed time: 0.375636 ms
+Elapsed time: 0.375305 ms
+Elapsed time: 0.371007 ms
+Elapsed time: 0.381467 ms
+Elapsed time: 0.380235 ms
+Finished running CLUE algorithm
+
+==31530== Profiling application: ./main toyDetector_9000 3 5 5 8 1 10 0
+==31530== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:   26.57%  572.80us        10  57.280us  56.256us  58.592us  kernel_compute_distanceToHigher(LayerTilesGPU*, PointsPtr, float, int)
+                   23.73%  511.62us        10  51.161us  50.624us  52.384us  kernel_compute_density(LayerTilesGPU*, PointsPtr, float, int)
+                   23.68%  510.50us        10  51.049us  48.864us  53.216us  kernel_assign_clusters(GPU::VecArray<int, int=10000> const *, GPU::VecArray<int, int=20> const *, PointsPtr, int)
+                   13.37%  288.35us        50  5.7670us  5.6640us  6.1440us  [CUDA memcpy DtoH]
+                    4.92%  106.14us        40  2.6530us  2.5920us  3.0080us  [CUDA memcpy HtoD]
+                    2.98%  64.224us        80     802ns     768ns  1.1520us  [CUDA memset]
+                    2.58%  55.712us        10  5.5710us  5.2480us  5.9520us  kernel_compute_histogram(LayerTilesGPU*, PointsPtr, int)
+                    2.17%  46.688us        10  4.6680us  4.2560us  4.8640us  kernel_find_clusters(GPU::VecArray<int, int=10000>*, GPU::VecArray<int, int=20>*, PointsPtr, float, float, float, int)
+      API calls:   95.65%  123.39ms        12  10.282ms  5.8310us  122.31ms  cudaMalloc
+                    2.26%  2.9108ms        90  32.342us  8.3860us  172.02us  cudaMemcpy
+                    0.85%  1.0918ms        12  90.983us  6.0910us  142.34us  cudaFree
+                    0.43%  555.61us        80  6.9450us  5.8810us  22.883us  cudaMemset
+                    0.33%  428.07us        97  4.4130us     150ns  189.21us  cuDeviceGetAttribute
+                    0.24%  314.39us        50  6.2870us  5.2800us  26.290us  cudaLaunchKernel
+                    0.20%  251.71us         1  251.71us  251.71us  251.71us  cuDeviceTotalMem
+                    0.04%  49.293us         1  49.293us  49.293us  49.293us  cuDeviceGetName
+                    0.00%  2.3240us         1  2.3240us  2.3240us  2.3240us  cuDeviceGetPCIBusId
+                    0.00%  1.2020us         3     400ns     170ns     741ns  cuDeviceGetCount
+                    0.00%     872ns         2     436ns     191ns     681ns  cuDeviceGet
+                    0.00%     220ns         1     220ns     220ns     220ns  cuDeviceGetUuid
+input file data/input/toyDetector_10000.csv
+output file data/output/toyDetector_10000_3_5_5_8.csv
+Start to load input points
+Finished loading input points
+Start to run CLUE algorithm
+==31546== NVPROF is profiling process 31546, command: ./main toyDetector_10000 3 5 5 8 1 10 0
+Elapsed time: 0.424648 ms
+Elapsed time: 0.394862 ms
+Elapsed time: 0.415491 ms
+Elapsed time: 0.396074 ms
+Elapsed time: 0.391336 ms
+Elapsed time: 0.390875 ms
+Elapsed time: 0.386466 ms
+Elapsed time: 0.386998 ms
+Elapsed time: 0.39382 ms
+Elapsed time: 0.395293 ms
+Finished running CLUE algorithm
+
+==31546== Profiling application: ./main toyDetector_10000 3 5 5 8 1 10 0
+==31546== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:   26.47%  603.65us        10  60.364us  58.944us  61.696us  kernel_compute_distanceToHigher(LayerTilesGPU*, PointsPtr, float, int)
+                   23.80%  542.66us        10  54.265us  53.504us  54.752us  kernel_compute_density(LayerTilesGPU*, PointsPtr, float, int)
+                   22.14%  504.83us        10  50.483us  49.312us  52.736us  kernel_assign_clusters(GPU::VecArray<int, int=10000> const *, GPU::VecArray<int, int=20> const *, PointsPtr, int)
+                   13.95%  318.02us        50  6.3600us  6.2400us  6.6560us  [CUDA memcpy DtoH]
+                    5.78%  131.87us        40  3.2960us  3.2000us  3.7760us  [CUDA memcpy HtoD]
+                    2.83%  64.544us        80     806ns     768ns  1.1520us  [CUDA memset]
+                    2.71%  61.729us        10  6.1720us  5.7600us  6.4960us  kernel_compute_histogram(LayerTilesGPU*, PointsPtr, int)
+                    2.33%  53.120us        10  5.3120us  4.9600us  5.7600us  kernel_find_clusters(GPU::VecArray<int, int=10000>*, GPU::VecArray<int, int=20>*, PointsPtr, float, float, float, int)
+      API calls:   95.65%  129.01ms        12  10.751ms  5.9910us  127.94ms  cudaMalloc
+                    2.26%  3.0514ms        90  33.904us  8.6560us  196.74us  cudaMemcpy
+                    0.82%  1.1037ms        12  91.973us  6.3020us  144.16us  cudaFree
+                    0.41%  552.26us        97  5.6930us     160ns  243.64us  cuDeviceGetAttribute
+                    0.41%  551.52us        80  6.8940us  5.7910us  22.111us  cudaMemset
+                    0.23%  312.87us        50  6.2570us  5.2690us  25.988us  cudaLaunchKernel
+                    0.18%  241.88us         1  241.88us  241.88us  241.88us  cuDeviceTotalMem
+                    0.04%  49.463us         1  49.463us  49.463us  49.463us  cuDeviceGetName
+                    0.00%  2.4050us         1  2.4050us  2.4050us  2.4050us  cuDeviceGetPCIBusId
+                    0.00%  1.1420us         3     380ns     150ns     741ns  cuDeviceGetCount
+                    0.00%     841ns         2     420ns     160ns     681ns  cuDeviceGet
+                    0.00%     381ns         1     381ns     381ns     381ns  cuDeviceGetUuid

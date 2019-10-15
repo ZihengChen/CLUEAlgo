@@ -1,9 +1,13 @@
+
+COMPUTER_NAME := $(shell uname -n)
+
 # Location of the CUDA Toolkit
 CUDA_PATH ?= /usr/local/cuda
 
 # architecture
 HOST_ARCH   := $(shell uname -m)
 TARGET_ARCH ?= $(HOST_ARCH)
+
 
 # operating system
 HOST_COMPILER ?= g++
@@ -12,7 +16,7 @@ NVCC          := $(CUDA_PATH)/bin/nvcc -ccbin $(HOST_COMPILER)
 # internal flags
 TARGET_SIZE := 64
 NVCCFLAGS   := -m${TARGET_SIZE}
-CCFLAGS     := -std=c++14 -O2 -g
+CCFLAGS     := -std=c++14 -O2 -g 
 LDFLAGS     :=
 
 # Debug build flags
@@ -23,7 +27,7 @@ else
       BUILD_TYPE := release
 endif
 
-ALL_CCFLAGS := --expt-relaxed-constexpr
+ALL_CCFLAGS := --expt-relaxed-constexpr -w
 ALL_CCFLAGS += $(NVCCFLAGS)
 ALL_CCFLAGS += $(EXTRA_NVCCFLAGS)
 ALL_CCFLAGS += $(addprefix -Xcompiler ,$(CCFLAGS))
@@ -35,15 +39,21 @@ ALL_LDFLAGS += $(addprefix -Xlinker ,$(LDFLAGS))
 ALL_LDFLAGS += $(addprefix -Xlinker ,$(EXTRA_LDFLAGS))
 
 
-TBB_BASE := /home/cmssw/slc7_amd64_gcc820/external/tbb/2019_U8
 # Common includes and paths for CUDA
 INCLUDES   := -I../../common/inc -I include -I cupla/include -I cupla/alpaka/include
 LIBRARIES  :=
-CUPLA_CUDA_ACC := -DFOR_CUDA
-CUPLA_CPUTBB_ACC := -DFOR_TBB -I $(TBB_BASE)/include -L $(TBB_BASE)/lib -ltbb
-
 CUDA_FLAGS := -x cu
+
+CUPLA_CPUTBB_ACC := -DFOR_TBB -I /usr/include/tbb -L /usr/lib/x86_64-linux-gnu -ltbb
+ifeq ($(COMPUTER_NAME), patatrack02.cern.ch)
+		TBB_BASE := /home/cmssw/slc7_amd64_gcc820/external/tbb/2019_U8
+		$(info >>> TBB_BASE=$(TBB_BASE))
+		CUPLA_CPUTBB_ACC := -DFOR_TBB -I $(TBB_BASE)/include -L $(TBB_BASE)/lib -ltbb
+endif
+
+
 CUPLA_FLAGS := -DUSE_CUPLA
+CUPLA_CUDA_ACC := -DFOR_CUDA
 
 ################################################################################
 

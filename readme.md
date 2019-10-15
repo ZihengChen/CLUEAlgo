@@ -13,7 +13,16 @@ source /cvmfs/sft.cern.ch/lcg/views/LCG_96/x86_64-centos7-gcc8-opt/setup.sh
 
 Then setup this project. **Fork this reop if developers**.
 ```bash
-git clone https://github.com/YOUR_FORK/CLUEAlgo.git
+git clone --recurse-submodules https://github.com/ZihengChen/CLUEAlgo.git
+cd CLUEAlgo
+make
+```
+
+### 1.2. Setup on a Ubuntu Machine with CUDA and GCC>7.0
+```
+sudo apt-get install libtbb-dev
+sudo apt-get install libboost-all-dev
+git clone --recurse-submodules https://github.com/ZihengChen/CLUEAlgo.git
 cd CLUEAlgo
 make
 ```
