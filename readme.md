@@ -4,24 +4,31 @@ Z.Chen[1], A. Di Pilato[2], F. Pantaleo[3], M. Rovere[3]
 
 *[1] Northwestern University, [2]University of Bari, [3] CERN*
 
-## 1. Setup on a CERN machine with GPUs
+## 1. Setup
 
+The prequesite dependencies are `>=gcc7`, `>=cuda10`, `Boost`, `TBB`
+
+Fork this reop if developers.
+
+**On a CERN machine with GPUs**
 Source the LCG View containing the correct version of GCC and Boost:
 ```bash
 source /cvmfs/sft.cern.ch/lcg/views/LCG_96/x86_64-centos7-gcc8-opt/setup.sh
-```
 
-Then setup this project. **Fork this reop if developers**.
-```bash
+# then setup this project
 git clone --recurse-submodules https://github.com/ZihengChen/CLUEAlgo.git
 cd CLUEAlgo
 make
 ```
 
-### 1.2. Setup on a Ubuntu Machine with CUDA and GCC>7.0
+**On an Ubuntu machine with GPUs**
+
+Install Boost and TBB first if they are missing.
 ```
 sudo apt-get install libtbb-dev
 sudo apt-get install libboost-all-dev
+
+# then setup this project
 git clone --recurse-submodules https://github.com/ZihengChen/CLUEAlgo.git
 cd CLUEAlgo
 make
