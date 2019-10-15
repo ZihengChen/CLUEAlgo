@@ -88,11 +88,10 @@ void mainRun( std::string inputFileName, std::string outputFileName,
     clueAlgo.verboseResults(outputFileName, -1);
   }
 
-  
+
   std::cout << "Finished running CLUE algorithm" << std::endl;
   std::cout << std::endl;
 } // end of testRun()
-
 
 
 
