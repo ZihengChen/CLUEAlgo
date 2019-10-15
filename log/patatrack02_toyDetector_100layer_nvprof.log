@@ -411,4 +411,3 @@ Finished running CLUE algorithm
                     0.00%  1.9470us         3     649ns     206ns  1.3460us  cuDeviceGetCount
                     0.00%  1.5500us         4     387ns     199ns     665ns  cuDeviceGet
                     0.00%     646ns         2     323ns     312ns     334ns  cuDeviceGetUuid
-
