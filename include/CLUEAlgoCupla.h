@@ -17,7 +17,7 @@
 #include "LayerTilesCupla.h"
 #include "CLUEAlgo.h"
 
-static const int maxNSeedsCupla = 10000;
+static const int maxNSeedsCupla = 100000;
 static const int maxNFollowersCupla = 20;
 static const int localStackSizePerSeedCupla = 20;
 
@@ -38,8 +38,8 @@ template<typename Acc>
 class CLUEAlgoCupla : public CLUEAlgo {
 
   public:
-    CLUEAlgoCupla(float dc, float d0, float deltac, float rhoc)
-      : CLUEAlgo(dc,d0,deltac,rhoc)
+    CLUEAlgoCupla(float dc, float d0, float deltac, float rhoc, bool verbose)
+      : CLUEAlgo(dc,d0,deltac,rhoc,verbose)
       {
       init_device();
     }
@@ -117,11 +117,14 @@ class CLUEAlgoCupla : public CLUEAlgo {
 
     void copy_tohost(){
       // result variables
-      cudaMemcpy(points_.rho.data(), d_points.rho, sizeof(float)*points_.n, cudaMemcpyDeviceToHost);
-      cudaMemcpy(points_.delta.data(), d_points.delta, sizeof(float)*points_.n, cudaMemcpyDeviceToHost);
-      cudaMemcpy(points_.nearestHigher.data(), d_points.nearestHigher, sizeof(int)*points_.n, cudaMemcpyDeviceToHost);
       cudaMemcpy(points_.clusterIndex.data(), d_points.clusterIndex, sizeof(int)*points_.n, cudaMemcpyDeviceToHost);
-      cudaMemcpy(points_.isSeed.data(), d_points.isSeed, sizeof(int)*points_.n, cudaMemcpyDeviceToHost);
+      if (verbose_) {
+        // other variables, copy only when verbose_==True
+        cudaMemcpy(points_.rho.data(), d_points.rho, sizeof(float)*points_.n, cudaMemcpyDeviceToHost);
+        cudaMemcpy(points_.delta.data(), d_points.delta, sizeof(float)*points_.n, cudaMemcpyDeviceToHost);
+        cudaMemcpy(points_.nearestHigher.data(), d_points.nearestHigher, sizeof(int)*points_.n, cudaMemcpyDeviceToHost);      
+        cudaMemcpy(points_.isSeed.data(), d_points.isSeed, sizeof(int)*points_.n, cudaMemcpyDeviceToHost);
+      }
     }
 };
 
@@ -265,6 +268,7 @@ struct kernel_find_clusters {
         d_seeds[0].push_back(acc, i); // head of d_seeds
       } else {
         if (!isOutlier) {
+          assert(d_points.nearestHigher[i] < numberOfPoints);
           // register as follower at its nearest higher
           d_followers[d_points.nearestHigher[i]].push_back(acc, i);
         }
@@ -301,9 +305,6 @@ struct kernel_assign_clusters {
         int idxEndOflocalStack = localStack[localStackSize - 1];
 
         int temp_clusterIndex = d_points.clusterIndex[idxEndOflocalStack];
-        
-            
-
         // pop_back last element of localStack
         localStack[localStackSize - 1] = -1;
         localStackSize--;
@@ -338,16 +339,18 @@ void CLUEAlgoCupla<Acc>::makeClusters() {
 #endif
   const dim3 gridSize(ceil(points_.n/ (float)blockSize.x), 1, 1);
 
-  CUPLA_KERNEL(kernel_compute_histogram)
-   (gridSize, blockSize, 0, 0)(d_hist, d_points, points_.n);
-
+  CUPLA_KERNEL(kernel_compute_histogram)(gridSize, blockSize, 0, 0)(d_hist, d_points, points_.n);
   CUPLA_KERNEL(kernel_compute_density)(gridSize, blockSize, 0, 0)(d_hist, d_points, dc_, points_.n);
-  CUPLA_KERNEL(kernel_compute_distanceToHigher)(gridSize, blockSize, 0, 0)(
-      d_hist, d_points, dm_, points_.n);
-  CUPLA_KERNEL(kernel_find_clusters)(gridSize, blockSize, 0, 0)(
-      d_seeds, d_followers, d_points, deltac_, deltao_, rhoc_, points_.n);
-  CUPLA_KERNEL(kernel_assign_clusters)(gridSize, blockSize, 0, 0)(d_seeds,
-   d_followers, d_points);
+  CUPLA_KERNEL(kernel_compute_distanceToHigher)(gridSize, blockSize, 0, 0)(d_hist, d_points, dm_, points_.n);
+  CUPLA_KERNEL(kernel_find_clusters)(gridSize, blockSize, 0, 0)(d_seeds, d_followers, d_points, deltac_, deltao_, rhoc_, points_.n);
+
+  ////////////////////////////////////////////
+  // assign clusters
+  // 1 point per seeds
+  ////////////////////////////////////////////
+
+  const dim3 gridSize_nseeds(ceil(maxNSeedsCupla / (float)blockSize.x), 1, 1);
+  CUPLA_KERNEL(kernel_assign_clusters)(gridSize_nseeds, blockSize, 0, 0)(d_seeds, d_followers, d_points);
 
   copy_tohost();
 }

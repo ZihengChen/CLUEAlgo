@@ -43,8 +43,8 @@ void mainRun( std::string inputFileName, std::string outputFileName,
   //////////////////////////////
   std::cout << "Start to run CLUE algorithm" << std::endl;
   if (useGPU) {
-#ifndef USE_CUPLA
-    CLUEAlgoGPU clueAlgo(dc, deltao, deltac, rhoc);
+    #ifndef USE_CUPLA
+    CLUEAlgoGPU clueAlgo(dc, deltao, deltac, rhoc, verbose);
     for (int r = 0; r<repeats; r++){
       clueAlgo.setPoints(x.size(), &x[0],&y[0],&layer[0],&weight[0]);
       // measure excution time of makeClusters
@@ -55,9 +55,10 @@ void mainRun( std::string inputFileName, std::string outputFileName,
       std::cout << "Elapsed time: " << elapsed.count() *1000 << " ms\n";
     }
   // output result to outputFileName. -1 means all points.
-  if (verbose) clueAlgo.verboseResults(outputFileName, -1);
-#else
-  CLUEAlgoCupla<cupla::Acc> clueAlgo(dc, deltao, deltac, rhoc);
+  clueAlgo.verboseResults(outputFileName, -1);
+
+  #else
+  CLUEAlgoCupla<cupla::Acc> clueAlgo(dc, deltao, deltac, rhoc, verbose);
   for (int r = 0; r<repeats; r++){
     clueAlgo.setPoints(x.size(), &x[0],&y[0],&layer[0],&weight[0]);
     // measure excution time of makeClusters
@@ -68,10 +69,12 @@ void mainRun( std::string inputFileName, std::string outputFileName,
     std::cout << "Elapsed time: " << elapsed.count() *1000 << " ms\n";
   }
   // output result to outputFileName. -1 means all points.
-    if (verbose) clueAlgo.verboseResults(outputFileName, -1);
-#endif
+  clueAlgo.verboseResults(outputFileName, -1);
+  #endif
+
+
   } else {
-    CLUEAlgo clueAlgo(dc, deltao, deltac, rhoc);
+    CLUEAlgo clueAlgo(dc, deltao, deltac, rhoc, verbose);
     for (int r = 0; r<repeats; r++){
       clueAlgo.setPoints(x.size(), &x[0],&y[0],&layer[0],&weight[0]);
       // measure excution time of makeClusters
@@ -82,8 +85,10 @@ void mainRun( std::string inputFileName, std::string outputFileName,
       std::cout << "Elapsed time: " << elapsed.count() *1000 << " ms\n";
     }
     // output result to outputFileName. -1 means all points.
-    if (verbose) clueAlgo.verboseResults(outputFileName, -1);
+    clueAlgo.verboseResults(outputFileName, -1);
   }
+
+  
   std::cout << "Finished running CLUE algorithm" << std::endl;
   std::cout << std::endl;
 } // end of testRun()

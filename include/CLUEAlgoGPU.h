@@ -4,7 +4,7 @@
 #include "CLUEAlgo.h"
 #include "LayerTilesGPU.h"
 
-static const int maxNSeeds = 10000; 
+static const int maxNSeeds = 100000; 
 static const int maxNFollowers = 20; 
 static const int localStackSizePerSeed = 20; 
 
@@ -26,7 +26,7 @@ class CLUEAlgoGPU : public CLUEAlgo {
 
   public:
     // constructor
-    CLUEAlgoGPU(float dc, float d0, float deltac, float rhoc) : CLUEAlgo(dc,d0,deltac,rhoc) {
+    CLUEAlgoGPU(float dc, float d0, float deltac, float rhoc, bool verbose) : CLUEAlgo(dc,d0,deltac,rhoc,verbose) {
       init_device();
     }
     // distrcutor
@@ -97,7 +97,7 @@ class CLUEAlgoGPU : public CLUEAlgo {
     }
 
     void clear_set(){
-      // result variables
+      // // result variables
       cudaMemset(d_points.rho, 0x00, sizeof(float)*points_.n);
       cudaMemset(d_points.delta, 0x00, sizeof(float)*points_.n);
       cudaMemset(d_points.nearestHigher, 0x00, sizeof(int)*points_.n);
@@ -111,15 +111,17 @@ class CLUEAlgoGPU : public CLUEAlgo {
 
     void copy_tohost(){
       // result variables
-      cudaMemcpy(points_.rho.data(), d_points.rho, sizeof(float)*points_.n, cudaMemcpyDeviceToHost);
-      cudaMemcpy(points_.delta.data(), d_points.delta, sizeof(float)*points_.n, cudaMemcpyDeviceToHost);
-      cudaMemcpy(points_.nearestHigher.data(), d_points.nearestHigher, sizeof(int)*points_.n, cudaMemcpyDeviceToHost);
       cudaMemcpy(points_.clusterIndex.data(), d_points.clusterIndex, sizeof(int)*points_.n, cudaMemcpyDeviceToHost);
-      cudaMemcpy(points_.isSeed.data(), d_points.isSeed, sizeof(int)*points_.n, cudaMemcpyDeviceToHost);
+      if (verbose_) {
+        // other variables, copy only when verbose_==True
+        cudaMemcpy(points_.rho.data(), d_points.rho, sizeof(float)*points_.n, cudaMemcpyDeviceToHost);
+        cudaMemcpy(points_.delta.data(), d_points.delta, sizeof(float)*points_.n, cudaMemcpyDeviceToHost);
+        cudaMemcpy(points_.nearestHigher.data(), d_points.nearestHigher, sizeof(int)*points_.n, cudaMemcpyDeviceToHost);
+        cudaMemcpy(points_.isSeed.data(), d_points.isSeed, sizeof(int)*points_.n, cudaMemcpyDeviceToHost);
+      }
     }
 
     // #endif // __CUDACC__
-
 };
 
 #endif

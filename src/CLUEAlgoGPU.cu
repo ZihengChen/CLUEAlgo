@@ -151,7 +151,6 @@ __global__ void kernel_find_clusters( GPU::VecArray<int,maxNSeeds>* d_seeds,
     } else {
       if (!isOutlier) {
         assert(d_points.nearestHigher[i] < numberOfPoints);
-        
         // register as follower at its nearest higher
         d_followers[d_points.nearestHigher[i]].push_back(i);  
       }
