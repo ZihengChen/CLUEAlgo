@@ -11,6 +11,7 @@ The prequesite dependencies are `>=gcc7`, `>=cuda10`, `Boost`, `TBB`
 Fork this reop if developers.
 
 **On a CERN machine with GPUs**
+
 Source the LCG View containing the correct version of GCC and Boost:
 ```bash
 source /cvmfs/sft.cern.ch/lcg/views/LCG_96/x86_64-centos7-gcc8-opt/setup.sh
@@ -23,8 +24,8 @@ make
 
 **On an Ubuntu machine with GPUs**
 
-Install Boost and TBB first if they are missing.
-```
+Install Boost and TBB first.
+```bash
 sudo apt-get install libtbb-dev
 sudo apt-get install libboost-all-dev
 
