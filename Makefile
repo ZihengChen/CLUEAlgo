@@ -46,9 +46,9 @@ CUDA_FLAGS := -x cu
 
 CUPLA_CPUTBB_ACC := -DFOR_TBB -I /usr/include/tbb -L /usr/lib/x86_64-linux-gnu -ltbb
 ifeq ($(COMPUTER_NAME), patatrack02.cern.ch)
-		TBB_BASE := /home/cmssw/slc7_amd64_gcc820/external/tbb/2019_U8
-		$(info >>> TBB_BASE=$(TBB_BASE))
-		CUPLA_CPUTBB_ACC := -DFOR_TBB -I $(TBB_BASE)/include -L $(TBB_BASE)/lib -ltbb
+TBB_BASE := /home/cmssw/slc7_amd64_gcc820/external/tbb/2019_U8
+$(info >>> TBB_BASE=$(TBB_BASE))
+CUPLA_CPUTBB_ACC := -DFOR_TBB -I $(TBB_BASE)/include -L $(TBB_BASE)/lib -ltbb
 endif
 
 
