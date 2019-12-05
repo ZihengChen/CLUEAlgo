@@ -65,8 +65,6 @@ The clustering result of a few sythetic dataset is shown below
 
 ## 5. Performannce on Toy Events
 We generate toy events on toy detector consist of 100 layers.
-A toy event with 4000 points per layer is shown as below.
-<p align=center><img width="40%" src=https://github.com/ZihengChen/CLUEAlgo/blob/master/plots/toyDetector_4000_5_10_5_8.png/></p>
 The average execution time of toy events on CPU and GPU are shown below
-<p align=center><img width="100%" src=https://github.com/ZihengChen/CLUEAlgo/blob/master/plots/Figure5.png/></p> 
+<p align=center><img width="80%" src=https://github.com/ZihengChen/CLUEAlgo/blob/master/plots/Figure5.png/></p> 
 
