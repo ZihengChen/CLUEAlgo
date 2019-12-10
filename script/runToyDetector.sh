@@ -1,4 +1,6 @@
 # ./main [fileName] [dc] [deltao] [deltac] [rhoc] [useGPU] [totalNumberOfEvent] [verbose]
+# ./mainCuplaCPUTBB toyDetector_10000 3 5 5 8 1 10 0
+
 export DC=3
 export DELTAO=5
 export DELTAC=5
