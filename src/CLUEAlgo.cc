@@ -1,13 +1,32 @@
 #include "CLUEAlgo.h"
 
-
 void CLUEAlgo::makeClusters(){
   std::array<LayerTiles, NLAYERS> allLayerTiles;
   // start clustering
+  auto start = std::chrono::high_resolution_clock::now();
   prepareDataStructures(allLayerTiles);
+  auto finish = std::chrono::high_resolution_clock::now();
+  std::chrono::duration<double> elapsed = finish - start;
+  std::cout << "--- prepareDataStructures:     " << elapsed.count() *1000 << " ms\n";
+
+
+  start = std::chrono::high_resolution_clock::now();
   calculateLocalDensity(allLayerTiles);
+  finish = std::chrono::high_resolution_clock::now();
+  elapsed = finish - start;
+  std::cout << "--- calculateLocalDensity:     " << elapsed.count() *1000 << " ms\n";
+
+  start = std::chrono::high_resolution_clock::now();
   calculateDistanceToHigher(allLayerTiles);
+  finish = std::chrono::high_resolution_clock::now();
+  elapsed = finish - start;
+  std::cout << "--- calculateDistanceToHigher: " << elapsed.count() *1000 << " ms\n";
+
+  start = std::chrono::high_resolution_clock::now();
   findAndAssignClusters();
+  finish = std::chrono::high_resolution_clock::now();
+  elapsed = finish - start;
+  std::cout << "--- findAndAssignClusters12:   " << elapsed.count() *1000 << " ms\n";
 }
 
 
@@ -129,6 +148,8 @@ void CLUEAlgo::findAndAssignClusters(){
     }
   }
 
+  auto start = std::chrono::high_resolution_clock::now();
+
   // expend clusters from seeds
   while (!localStack.empty()) {
     int i = localStack.back();
@@ -143,6 +164,11 @@ void CLUEAlgo::findAndAssignClusters(){
       localStack.push_back(j);
     }
   }
+  
+  auto finish = std::chrono::high_resolution_clock::now();
+  std::chrono::duration<double> elapsed = finish - start;
+  std::cout << "--- findAndAssignClusters2:    " << elapsed.count() *1000 << " ms\n";
+
 }
 
 inline float CLUEAlgo::distance(int i, int j) const {

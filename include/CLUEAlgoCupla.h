@@ -339,18 +339,44 @@ void CLUEAlgoCupla<Acc>::makeClusters() {
 #endif
   const dim3 gridSize(ceil(points_.n/ (float)blockSize.x), 1, 1);
 
+
+
+
+  auto start = std::chrono::high_resolution_clock::now();
   CUPLA_KERNEL(kernel_compute_histogram)(gridSize, blockSize, 0, 0)(d_hist, d_points, points_.n);
+  auto finish = std::chrono::high_resolution_clock::now();
+  std::chrono::duration<double> elapsed = finish - start;
+  std::cout << "--- prepareDataStructures:     " << elapsed.count() *1000 << " ms\n";
+
+  start = std::chrono::high_resolution_clock::now();
   CUPLA_KERNEL(kernel_compute_density)(gridSize, blockSize, 0, 0)(d_hist, d_points, dc_, points_.n);
+  finish = std::chrono::high_resolution_clock::now();
+  elapsed = finish - start;
+  std::cout << "--- calculateDistanceToHigher: " << elapsed.count() *1000 << " ms\n";
+
+
+  start = std::chrono::high_resolution_clock::now();
   CUPLA_KERNEL(kernel_compute_distanceToHigher)(gridSize, blockSize, 0, 0)(d_hist, d_points, dm_, points_.n);
+  finish = std::chrono::high_resolution_clock::now();
+  elapsed = finish - start;
+  std::cout << "--- calculateLocalDensity:     " << elapsed.count() *1000 << " ms\n";
+ 
+  start = std::chrono::high_resolution_clock::now();
   CUPLA_KERNEL(kernel_find_clusters)(gridSize, blockSize, 0, 0)(d_seeds, d_followers, d_points, deltac_, deltao_, rhoc_, points_.n);
+  finish = std::chrono::high_resolution_clock::now();
+  elapsed = finish - start;
+  std::cout << "--- findAndAssignClusters1:    " << elapsed.count() *1000 << " ms\n";
 
   ////////////////////////////////////////////
   // assign clusters
   // 1 point per seeds
   ////////////////////////////////////////////
-
+  start = std::chrono::high_resolution_clock::now();
   const dim3 gridSize_nseeds(ceil(maxNSeedsCupla / (float)blockSize.x), 1, 1);
   CUPLA_KERNEL(kernel_assign_clusters)(gridSize_nseeds, blockSize, 0, 0)(d_seeds, d_followers, d_points);
+  finish = std::chrono::high_resolution_clock::now();
+  elapsed = finish - start;
+  std::cout << "--- findAndAssignClusters2:    " << elapsed.count() *1000 << " ms\n";
 
   copy_tohost();
 }
