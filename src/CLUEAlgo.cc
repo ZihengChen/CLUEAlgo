@@ -22,11 +22,7 @@ void CLUEAlgo::makeClusters(){
   elapsed = finish - start;
   std::cout << "--- calculateDistanceToHigher: " << elapsed.count() *1000 << " ms\n";
 
-  start = std::chrono::high_resolution_clock::now();
   findAndAssignClusters();
-  finish = std::chrono::high_resolution_clock::now();
-  elapsed = finish - start;
-  std::cout << "--- findAndAssignClusters12:   " << elapsed.count() *1000 << " ms\n";
 }
 
 
@@ -121,6 +117,7 @@ void CLUEAlgo::calculateDistanceToHigher( std::array<LayerTiles, NLAYERS> & allL
 }
 
 void CLUEAlgo::findAndAssignClusters(){
+  auto start = std::chrono::high_resolution_clock::now();
   
   int nClusters = 0;
   
@@ -148,8 +145,11 @@ void CLUEAlgo::findAndAssignClusters(){
     }
   }
 
-  auto start = std::chrono::high_resolution_clock::now();
-
+  auto finish = std::chrono::high_resolution_clock::now();
+  std::chrono::duration<double> elapsed = finish - start;
+  std::cout << "--- findSeedAndFollowers:      " << elapsed.count() *1000 << " ms\n";
+  
+  start = std::chrono::high_resolution_clock::now();
   // expend clusters from seeds
   while (!localStack.empty()) {
     int i = localStack.back();
@@ -164,10 +164,11 @@ void CLUEAlgo::findAndAssignClusters(){
       localStack.push_back(j);
     }
   }
-  
-  auto finish = std::chrono::high_resolution_clock::now();
-  std::chrono::duration<double> elapsed = finish - start;
-  std::cout << "--- findAndAssignClusters2:    " << elapsed.count() *1000 << " ms\n";
+  finish = std::chrono::high_resolution_clock::now();
+  elapsed = finish - start;
+  std::cout << "--- assignClusters:            " << elapsed.count() *1000 << " ms\n";
+
+
 
 }
 

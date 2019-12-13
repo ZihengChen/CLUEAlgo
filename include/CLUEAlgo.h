@@ -25,7 +25,7 @@ class CLUEAlgo{
       rhoc_ = rhoc;
       dm_ = std::max(deltao_, deltac_);
       verbose_ = verbose;
-      
+    
     }
     // distrcutor
     ~CLUEAlgo(){} 
@@ -33,7 +33,7 @@ class CLUEAlgo{
     // public variables
     float dc_, dm_, deltao_, deltac_, rhoc_;
     bool verbose_;
-    Points points_; 
+    Points points_;
 
 
     // public methods

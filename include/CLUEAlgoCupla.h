@@ -365,7 +365,7 @@ void CLUEAlgoCupla<Acc>::makeClusters() {
   CUPLA_KERNEL(kernel_find_clusters)(gridSize, blockSize, 0, 0)(d_seeds, d_followers, d_points, deltac_, deltao_, rhoc_, points_.n);
   finish = std::chrono::high_resolution_clock::now();
   elapsed = finish - start;
-  std::cout << "--- findAndAssignClusters1:    " << elapsed.count() *1000 << " ms\n";
+  std::cout << "--- findSeedAndFollowers:      " << elapsed.count() *1000 << " ms\n";
 
   ////////////////////////////////////////////
   // assign clusters
@@ -376,7 +376,7 @@ void CLUEAlgoCupla<Acc>::makeClusters() {
   CUPLA_KERNEL(kernel_assign_clusters)(gridSize_nseeds, blockSize, 0, 0)(d_seeds, d_followers, d_points);
   finish = std::chrono::high_resolution_clock::now();
   elapsed = finish - start;
-  std::cout << "--- findAndAssignClusters2:    " << elapsed.count() *1000 << " ms\n";
+  std::cout << "--- assignClusters:            " << elapsed.count() *1000 << " ms\n";
 
   copy_tohost();
 }

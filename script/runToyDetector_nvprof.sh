@@ -3,7 +3,7 @@ export DC=3
 export DELTAO=5
 export DELTAC=5
 export RHOC=8
-export NEVENT=10
+export NEVENT=25
 
 
 echo "----------------"
