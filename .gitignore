@@ -1,5 +1,8 @@
-data/output/*
+# data/output/*
 data/output.txt
 *DS_Store
 *.o
 main
+main*
+data/input/toyDetectorShuffled*
+plots/output/toyDetector*
