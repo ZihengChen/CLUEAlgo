@@ -8,7 +8,7 @@
     decide seeds/outliers, register followers &   2.79 $\pm$  0.10 ms       &   3.11 $\pm$  0.12 ms ( 0.90x)        &   0.04 ms ( 74.03x)       \\
     expand clusters                           &   0.40 $\pm$  0.01 ms       &   0.27 $\pm$  0.02 ms ( 1.48x)        &   0.04 ms (  9.27x)       \\ \hline
     cuda memcpy, memset                       & --                          & --                                    &   0.31 ms,   0.06 ms      \\ 
-    other                                     &   5.64 ms                   &  17.65 ms                             &   0.68 ms                 \\ \hline
+    other                                     &   5.64 $\pm$  0.28 ms       &  17.65 $\pm$  2.28 ms                 &   0.68 ms                 \\ \hline
     \textbf{TOTAL} ( 1000 points per layer)   & \textbf{ 38.72 $\pm$  0.39 ms} & \textbf{ 27.00 $\pm$  2.68 ms ( 1.43x)} & \textbf{  1.55 $\pm$  0.02 ms ( 25.03x)}  \\
     \hline 
     \end{tabular}
@@ -25,7 +25,7 @@
     decide seeds/outliers, register followers &   6.09 $\pm$  0.10 ms       &   5.82 $\pm$  0.18 ms ( 1.05x)        &   0.09 ms ( 69.29x)       \\
     expand clusters                           &   1.59 $\pm$  0.01 ms       &   0.54 $\pm$  0.02 ms ( 2.94x)        &   0.08 ms ( 18.77x)       \\ \hline
     cuda memcpy, memset                       & --                          & --                                    &   0.61 ms,   0.07 ms      \\ 
-    other                                     &   7.50 ms                   &  18.55 ms                             &   0.89 ms                 \\ \hline
+    other                                     &   7.50 $\pm$  0.22 ms       &  18.55 $\pm$  2.50 ms                 &   0.89 ms                 \\ \hline
     \textbf{TOTAL} ( 2000 points per layer)   & \textbf{ 85.57 $\pm$  0.36 ms} & \textbf{ 36.31 $\pm$  2.89 ms ( 2.36x)} & \textbf{  2.54 $\pm$  0.03 ms ( 33.71x)}  \\
     \hline 
     \end{tabular}
@@ -42,7 +42,7 @@
     decide seeds/outliers, register followers &   9.03 $\pm$  0.12 ms       &   8.36 $\pm$  0.04 ms ( 1.08x)        &   0.13 ms ( 67.05x)       \\
     expand clusters                           &   2.73 $\pm$  0.02 ms       &   0.88 $\pm$  0.03 ms ( 3.11x)        &   0.13 ms ( 21.37x)       \\ \hline
     cuda memcpy, memset                       & --                          & --                                    &   0.91 ms,   0.07 ms      \\ 
-    other                                     &   9.39 ms                   &  19.86 ms                             &   0.99 ms                 \\ \hline
+    other                                     &   9.39 $\pm$  0.14 ms       &  19.86 $\pm$  2.64 ms                 &   0.99 ms                 \\ \hline
     \textbf{TOTAL} ( 3000 points per layer)   & \textbf{130.02 $\pm$  0.36 ms} & \textbf{ 46.22 $\pm$  2.93 ms ( 2.81x)} & \textbf{  3.53 $\pm$  0.01 ms ( 36.85x)}  \\
     \hline 
     \end{tabular}
@@ -59,7 +59,7 @@
     decide seeds/outliers, register followers &  13.04 $\pm$  0.18 ms       &  11.65 $\pm$  0.04 ms ( 1.12x)        &   0.19 ms ( 67.47x)       \\
     expand clusters                           &   4.22 $\pm$  0.02 ms       &   1.35 $\pm$  0.02 ms ( 3.11x)        &   0.23 ms ( 18.09x)       \\ \hline
     cuda memcpy, memset                       & --                          & --                                    &   1.21 ms,   0.07 ms      \\ 
-    other                                     &  11.61 ms                   &  21.04 ms                             &   1.00 ms                 \\ \hline
+    other                                     &  11.61 $\pm$  0.03 ms       &  21.04 $\pm$  2.83 ms                 &   1.00 ms                 \\ \hline
     \textbf{TOTAL} ( 4000 points per layer)   & \textbf{191.49 $\pm$  0.33 ms} & \textbf{ 58.04 $\pm$  3.12 ms ( 3.30x)} & \textbf{  4.50 $\pm$  0.01 ms ( 42.59x)}  \\
     \hline 
     \end{tabular}
@@ -76,7 +76,7 @@
     decide seeds/outliers, register followers &  15.89 $\pm$  0.34 ms       &  14.31 $\pm$  0.06 ms ( 1.11x)        &   0.24 ms ( 65.30x)       \\
     expand clusters                           &   5.33 $\pm$  0.02 ms       &   1.75 $\pm$  0.04 ms ( 3.05x)        &   0.33 ms ( 16.07x)       \\ \hline
     cuda memcpy, memset                       & --                          & --                                    &   1.51 ms,   0.08 ms      \\ 
-    other                                     &  13.29 ms                   &  22.15 ms                             &   1.03 ms                 \\ \hline
+    other                                     &  13.29 $\pm$  0.08 ms       &  22.15 $\pm$  2.94 ms                 &   1.03 ms                 \\ \hline
     \textbf{TOTAL} ( 5000 points per layer)   & \textbf{240.28 $\pm$  0.39 ms} & \textbf{ 67.62 $\pm$  3.24 ms ( 3.55x)} & \textbf{  5.45 $\pm$  0.01 ms ( 44.06x)}  \\
     \hline 
     \end{tabular}
@@ -93,7 +93,7 @@
     decide seeds/outliers, register followers &  17.73 $\pm$  0.35 ms       &  17.63 $\pm$  0.05 ms ( 1.01x)        &   0.29 ms ( 61.99x)       \\
     expand clusters                           &   6.75 $\pm$  0.03 ms       &   2.10 $\pm$  0.04 ms ( 3.22x)        &   0.43 ms ( 15.51x)       \\ \hline
     cuda memcpy, memset                       & --                          & --                                    &   1.82 ms,   0.08 ms      \\ 
-    other                                     &  15.00 ms                   &  23.29 ms                             &   1.06 ms                 \\ \hline
+    other                                     &  15.00 $\pm$  0.22 ms       &  23.29 $\pm$  3.09 ms                 &   1.06 ms                 \\ \hline
     \textbf{TOTAL} ( 6000 points per layer)   & \textbf{285.04 $\pm$  0.46 ms} & \textbf{ 78.07 $\pm$  3.38 ms ( 3.65x)} & \textbf{  6.27 $\pm$  0.01 ms ( 45.49x)}  \\
     \hline 
     \end{tabular}
@@ -110,7 +110,7 @@
     decide seeds/outliers, register followers &  24.09 $\pm$  0.19 ms       &  20.98 $\pm$  0.10 ms ( 1.15x)        &   0.35 ms ( 67.88x)       \\
     expand clusters                           &   9.46 $\pm$  0.06 ms       &   2.66 $\pm$  0.03 ms ( 3.55x)        &   0.63 ms ( 14.93x)       \\ \hline
     cuda memcpy, memset                       & --                          & --                                    &   2.12 ms,   0.08 ms      \\ 
-    other                                     &  17.43 ms                   &  24.36 ms                             &   1.05 ms                 \\ \hline
+    other                                     &  17.43 $\pm$  0.31 ms       &  24.36 $\pm$  3.26 ms                 &   1.05 ms                 \\ \hline
     \textbf{TOTAL} ( 7000 points per layer)   & \textbf{357.47 $\pm$  0.49 ms} & \textbf{ 89.67 $\pm$  3.58 ms ( 3.99x)} & \textbf{  7.38 $\pm$  0.01 ms ( 48.46x)}  \\
     \hline 
     \end{tabular}
@@ -127,7 +127,7 @@
     decide seeds/outliers, register followers &  26.32 $\pm$  1.57 ms       &  24.19 $\pm$  0.07 ms ( 1.09x)        &   0.42 ms ( 62.56x)       \\
     expand clusters                           &  10.98 $\pm$  0.04 ms       &   3.15 $\pm$  0.05 ms ( 3.48x)        &   0.70 ms ( 15.58x)       \\ \hline
     cuda memcpy, memset                       & --                          & --                                    &   2.43 ms,   0.08 ms      \\ 
-    other                                     &  19.00 ms                   &  25.59 ms                             &   1.11 ms                 \\ \hline
+    other                                     &  19.00 $\pm$  0.39 ms       &  25.59 $\pm$  3.41 ms                 &   1.11 ms                 \\ \hline
     \textbf{TOTAL} ( 8000 points per layer)   & \textbf{417.48 $\pm$  1.69 ms} & \textbf{101.71 $\pm$  3.72 ms ( 4.10x)} & \textbf{  8.43 $\pm$  0.02 ms ( 49.51x)}  \\
     \hline 
     \end{tabular}
@@ -144,7 +144,7 @@
     decide seeds/outliers, register followers &  28.72 $\pm$  1.35 ms       &  27.01 $\pm$  0.11 ms ( 1.06x)        &   0.47 ms ( 60.65x)       \\
     expand clusters                           &  12.98 $\pm$  0.04 ms       &   3.71 $\pm$  0.04 ms ( 3.50x)        &   0.89 ms ( 14.59x)       \\ \hline
     cuda memcpy, memset                       & --                          & --                                    &   2.73 ms,   0.08 ms      \\ 
-    other                                     &  21.10 ms                   &  26.78 ms                             &   1.11 ms                 \\ \hline
+    other                                     &  21.10 $\pm$  0.55 ms       &  26.78 $\pm$  3.57 ms                 &   1.11 ms                 \\ \hline
     \textbf{TOTAL} ( 9000 points per layer)   & \textbf{475.82 $\pm$  1.39 ms} & \textbf{112.38 $\pm$  3.97 ms ( 4.23x)} & \textbf{  9.39 $\pm$  0.02 ms ( 50.65x)}  \\
     \hline 
     \end{tabular}
@@ -161,7 +161,7 @@
     decide seeds/outliers, register followers &  31.31 $\pm$  0.57 ms       &  30.59 $\pm$  0.08 ms ( 1.02x)        &   0.53 ms ( 58.84x)       \\
     expand clusters                           &  15.03 $\pm$  0.06 ms       &   4.10 $\pm$  0.03 ms ( 3.66x)        &   1.06 ms ( 14.13x)       \\ \hline
     cuda memcpy, memset                       & --                          & --                                    &   3.02 ms,   0.08 ms      \\ 
-    other                                     &  23.75 ms                   &  27.80 ms                             &   1.14 ms                 \\ \hline
+    other                                     &  23.75 $\pm$  0.66 ms       &  27.80 $\pm$  3.77 ms                 &   1.14 ms                 \\ \hline
     \textbf{TOTAL} (10000 points per layer)   & \textbf{531.97 $\pm$  0.65 ms} & \textbf{123.57 $\pm$  4.28 ms ( 4.31x)} & \textbf{ 10.40 $\pm$  0.02 ms ( 51.16x)}  \\
     \hline 
     \end{tabular}
