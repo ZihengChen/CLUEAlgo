@@ -7,7 +7,9 @@
 #include "CLUEAlgoGPU.h"
 #else
 #include "CLUEAlgoCupla.h"
+#include "tbb/task_scheduler_init.h"
 #endif
+
 
 void mainRun( std::string inputFileName, std::string outputFileName,
               float dc, float deltao, float deltac, float rhoc,
@@ -105,7 +107,9 @@ int main(int argc, char *argv[]) {
   int totalNumberOfEvent = 10;
   bool verbose=false;
 
-  if (argc == 9) {
+  int TBBNumberOfThread = 1;
+
+  if (argc == 9 | argc == 10) {
     dc = std::stof(argv[2]);
     deltao = std::stof(argv[3]);
     deltac = std::stof(argv[4]);
@@ -113,11 +117,17 @@ int main(int argc, char *argv[]) {
     useGPU = (std::stoi(argv[6])==1)? true:false;
     totalNumberOfEvent = std::stoi(argv[7]);
     verbose = (std::stoi(argv[8])==1)? true:false;
+    if (argc == 10) {
+      TBBNumberOfThread = std::stoi(argv[9]);
+    }
   } else {
     std::cout << "bin/main [fileName] [dc] [deltao] [deltac] [rhoc] [useGPU] [totalNumberOfEvent] [verbose]" << std::endl;
     return 0;
   }
 
+  #ifdef USE_CUPLA
+    tbb::task_scheduler_init init(TBBNumberOfThread);
+  #endif
 
   //////////////////////////////
   // MARK -- set input and output files

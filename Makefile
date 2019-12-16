@@ -79,7 +79,8 @@ endif
 # Target rules
 all: build
 
-build: main mainCuplaCUDA mainCuplaCPUSerial mainCuplaCPUTBB
+build: main mainCuplaCPUTBB 
+#mainCuplaCUDA mainCuplaCPUSerial 
 
 CLUEAlgo.o:src/CLUEAlgo.cc
 	$(EXEC) $(NVCC) $(INCLUDES) $(ALL_CCFLAGS) $(GENCODE_FLAGS) -o $@ -c $<
@@ -102,14 +103,15 @@ mainCuplaCPUTBB.o:src/main.cc
 main: main.o CLUEAlgoGPU.o CLUEAlgo.o
 	$(EXEC) $(NVCC) $(ALL_LDFLAGS) $(GENCODE_FLAGS) -o $@ $+ $(LIBRARIES)
 
-mainCuplaCUDA: mainCuplaCUDA.o include/CLUEAlgoCupla.h CLUEAlgo.o
-	$(EXEC) $(NVCC) $(ALL_LDFLAGS) $(GENCODE_FLAGS) -o $@ mainCuplaCUDA.o CLUEAlgo.o $(LIBRARIES)
-
-mainCuplaCPUSerial: mainCuplaCPUSerial.o include/CLUEAlgoCupla.h CLUEAlgo.o
-	$(EXEC) $(NVCC) $(ALL_LDFLAGS) $(GENCODE_FLAGS) -o $@ mainCuplaCPUSerial.o CLUEAlgo.o $(LIBRARIES) $(CUPLA_CPUSERIAL_ACC)
-
 mainCuplaCPUTBB: mainCuplaCPUTBB.o include/CLUEAlgoCupla.h CLUEAlgo.o
 	$(EXEC) $(NVCC) $(ALL_LDFLAGS) $(GENCODE_FLAGS) -o $@ mainCuplaCPUTBB.o CLUEAlgo.o $(LIBRARIES) $(CUPLA_CPUTBB_ACC)
+
+#mainCuplaCUDA: mainCuplaCUDA.o include/CLUEAlgoCupla.h CLUEAlgo.o
+#	$(EXEC) $(NVCC) $(ALL_LDFLAGS) $(GENCODE_FLAGS) -o $@ mainCuplaCUDA.o CLUEAlgo.o $(LIBRARIES)
+
+#mainCuplaCPUSerial: mainCuplaCPUSerial.o include/CLUEAlgoCupla.h CLUEAlgo.o
+#	$(EXEC) $(NVCC) $(ALL_LDFLAGS) $(GENCODE_FLAGS) -o $@ mainCuplaCPUSerial.o CLUEAlgo.o $(LIBRARIES) $(CUPLA_CPUSERIAL_ACC)
+
 
 run: build
 	$(EXEC) main
