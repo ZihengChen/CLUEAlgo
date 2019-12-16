@@ -1,6 +1,8 @@
 # ./main [fileName] [dc] [deltao] [deltac] [rhoc] [useGPU] [totalNumberOfEvent] [verbose]
 # ./mainCuplaCPUTBB toyDetector_10000 3 5 5 8 1 1 0
 # ./main toyDetector_10000 3 5 5 8 0 1 0
+# sh script/runToyDetector.sh &> log/ryzen_toyDetector.log
+# sh script/runToyDetector.sh &> log/patatrack02_toyDetector.log
 
 export DC=3
 export DELTAO=5
