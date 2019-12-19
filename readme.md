@@ -1,8 +1,8 @@
 # Standalone CLUE Algorithm on GPU and CPU
 
-Z.Chen[1], A. Di Pilato[2], F. Pantaleo[3], M. Rovere[3]
+Z.Chen[1], A. Di Pilato[2,3], F. Pantaleo[4], M. Rovere[4]
 
-*[1] Northwestern University, [2]University of Bari, [3] CERN*
+*[1] Northwestern University, [2]University of Bari, [3]INFN, [4] CERN*
 
 ## 1. Setup
 
@@ -51,20 +51,14 @@ The input files are `data/input/*.csv` with columns
 The output files are `data/output/*.csv` with columns
 * x, y, layer, weight, rho, delta, nh, isSeed, clusterId
 
-If you meet any error when compiling or running this project, 
-contact us at zihengchen2015@u.northwestern.edu
-## 3. Implementation
+If you meet any error when compiling or running this project, contact us
 
-<p align=center><img width="50%" src=https://github.com/ZihengChen/CLUEAlgo/blob/master/plots/implementations.png/></p> 
-Result of CPU and GPU are tested to identical.
-
-
-## 4. Examples
+## 3. Examples
 The clustering result of a few sythetic dataset is shown below
-<p align=center><img width="100%" src=https://github.com/ZihengChen/CLUEAlgo/blob/master/plots/examples.png/></p> 
+<p align=center><img width="100%" src=https://github.com/ZihengChen/CLUEAlgo/blob/master/plots/Figure3.png/></p> 
 
-## 5. Performannce on Toy Events
+## 4. Performannce on Toy Events
 We generate toy events on toy detector consist of 100 layers.
 The average execution time of toy events on CPU and GPU are shown below
-<p align=center><img width="80%" src=https://github.com/ZihengChen/CLUEAlgo/blob/master/plots/Figure5.png/></p> 
+<p align=center><img width="80%" src=https://github.com/ZihengChen/CLUEAlgo/blob/master/plots/Figure5_1.png/></p> 
 
