@@ -1,15 +1,15 @@
     % 1000
     \begin{tabular}{l|c|c|c}
     \hline
-    CLUE Step                                 & CPU [1T] (baseline)         & CPU TBB [40T]                         & GPU                       \\ \hline
-    build fixed-grid spatial index            &   5.38 $\pm$  0.71 ms       &  14.30 $\pm$  1.97 ms ( 0.38x)        &   0.03 ms (177.69x)       \\
-    calculate local density                   &  15.20 $\pm$  1.69 ms       &   1.26 $\pm$  0.19 ms (12.06x)        &   0.06 ms (265.19x)       \\
-    calculate nearest-higher and separation   &  19.31 $\pm$  2.70 ms       &   1.53 $\pm$  0.23 ms (12.60x)        &   0.08 ms (241.47x)       \\
-    decide seeds/outliers, register followers &   4.06 $\pm$  0.56 ms       &  12.30 $\pm$  1.36 ms ( 0.33x)        &   0.02 ms (196.24x)       \\
-    expand clusters                           &   0.47 $\pm$  0.08 ms       &   0.29 $\pm$  0.10 ms ( 1.63x)        &   0.05 ms (  9.22x)       \\ \hline
-    cuda memcpy, memset                       & --                          & --                                    &   0.17 ms,   0.09 ms      \\ 
-    other                                     &   6.29 $\pm$  2.58 ms       &  24.43 $\pm$  2.33 ms                 &   0.75 ms                 \\ \hline
-    \textbf{TOTAL} ( 1000 points per layer)   & \textbf{ 50.70 $\pm$  6.64 ms} & \textbf{ 54.12 $\pm$  4.75 ms ( 0.94x)} & \textbf{  1.25 $\pm$  0.01 ms ( 40.52x)}  \\
+    CLUE Step                                 & CPU [1T] (baseline)         & CPU TBB [10T]                         & GPU                       \\ \hline
+    build fixed-grid spatial index            &   5.50 $\pm$  0.82 ms       &   9.38 $\pm$  1.70 ms ( 0.59x)        &   0.03 ms (187.44x)       \\
+    calculate local density                   &  15.58 $\pm$  2.53 ms       &   2.61 $\pm$  0.65 ms ( 5.97x)        &   0.06 ms (278.53x)       \\
+    calculate nearest-higher and separation   &  19.92 $\pm$  4.06 ms       &   3.11 $\pm$  0.79 ms ( 6.40x)        &   0.08 ms (238.02x)       \\
+    decide seeds/outliers, register followers &   4.20 $\pm$  0.82 ms       &   9.15 $\pm$  1.33 ms ( 0.46x)        &   0.02 ms (202.73x)       \\
+    expand clusters                           &   0.47 $\pm$  0.11 ms       &   0.43 $\pm$  0.10 ms ( 1.10x)        &   0.05 ms (  9.26x)       \\ \hline
+    cuda memcpy, memset                       & --                          & --                                    &   0.17 ms,   0.08 ms      \\ 
+    other                                     &   6.31 $\pm$  2.57 ms       &  20.38 $\pm$  3.76 ms                 &   0.58 ms                 \\ \hline
+    \textbf{TOTAL} ( 1000 points per layer)   & \textbf{ 51.98 $\pm$  8.94 ms} & \textbf{ 45.06 $\pm$  7.25 ms ( 1.15x)} & \textbf{  1.07 $\pm$  0.14 ms ( 48.47x)}  \\
     \hline
     \multicolumn{4}{c}{} 
     \end{tabular}
@@ -19,15 +19,15 @@
     % 2000
     \begin{tabular}{l|c|c|c}
     \hline
-    CLUE Step                                 & CPU [1T] (baseline)         & CPU TBB [40T]                         & GPU                       \\ \hline
-    build fixed-grid spatial index            &  11.10 $\pm$  0.61 ms       &  29.85 $\pm$  6.25 ms ( 0.37x)        &   0.07 ms (169.11x)       \\
-    calculate local density                   &  36.13 $\pm$  1.68 ms       &   2.71 $\pm$  0.91 ms (13.35x)        &   0.11 ms (320.34x)       \\
-    calculate nearest-higher and separation   &  45.09 $\pm$  1.97 ms       &   3.24 $\pm$  0.50 ms (13.90x)        &   0.15 ms (310.76x)       \\
-    decide seeds/outliers, register followers &   8.28 $\pm$  0.64 ms       &  24.45 $\pm$  2.40 ms ( 0.34x)        &   0.06 ms (143.57x)       \\
-    expand clusters                           &   1.67 $\pm$  0.27 ms       &   0.46 $\pm$  0.07 ms ( 3.61x)        &   0.07 ms ( 22.23x)       \\ \hline
-    cuda memcpy, memset                       & --                          & --                                    &   0.33 ms,   0.10 ms      \\ 
-    other                                     &   8.40 $\pm$  1.50 ms       &  26.69 $\pm$ 10.67 ms                 &   1.13 ms                 \\ \hline
-    \textbf{TOTAL} ( 2000 points per layer)   & \textbf{110.67 $\pm$  5.74 ms} & \textbf{ 87.41 $\pm$ 15.26 ms ( 1.27x)} & \textbf{  2.02 $\pm$  0.17 ms ( 54.74x)}  \\
+    CLUE Step                                 & CPU [1T] (baseline)         & CPU TBB [10T]                         & GPU                       \\ \hline
+    build fixed-grid spatial index            &  11.01 $\pm$  0.67 ms       &  23.52 $\pm$  4.06 ms ( 0.47x)        &   0.07 ms (167.61x)       \\
+    calculate local density                   &  35.98 $\pm$  1.77 ms       &   7.51 $\pm$  1.30 ms ( 4.79x)        &   0.11 ms (318.84x)       \\
+    calculate nearest-higher and separation   &  45.00 $\pm$  2.30 ms       &   8.83 $\pm$  1.43 ms ( 5.09x)        &   0.14 ms (320.98x)       \\
+    decide seeds/outliers, register followers &   8.39 $\pm$  0.60 ms       &  21.76 $\pm$  2.50 ms ( 0.39x)        &   0.06 ms (145.20x)       \\
+    expand clusters                           &   1.63 $\pm$  0.13 ms       &   0.88 $\pm$  0.17 ms ( 1.86x)        &   0.08 ms ( 21.75x)       \\ \hline
+    cuda memcpy, memset                       & --                          & --                                    &   0.33 ms,   0.09 ms      \\ 
+    other                                     &   8.45 $\pm$  1.58 ms       &  25.36 $\pm$ 14.49 ms                 &   0.76 ms                 \\ \hline
+    \textbf{TOTAL} ( 2000 points per layer)   & \textbf{110.45 $\pm$  6.22 ms} & \textbf{ 87.86 $\pm$ 18.09 ms ( 1.26x)} & \textbf{  1.63 $\pm$  0.12 ms ( 67.66x)}  \\
     \hline
     \multicolumn{4}{c}{} 
     \end{tabular}
@@ -37,15 +37,15 @@
     % 3000
     \begin{tabular}{l|c|c|c}
     \hline
-    CLUE Step                                 & CPU [1T] (baseline)         & CPU TBB [40T]                         & GPU                       \\ \hline
-    build fixed-grid spatial index            &  17.60 $\pm$  1.24 ms       &  45.09 $\pm$  3.46 ms ( 0.39x)        &   0.10 ms (182.12x)       \\
-    calculate local density                   &  55.85 $\pm$  3.59 ms       &   4.17 $\pm$  2.77 ms (13.40x)        &   0.14 ms (413.15x)       \\
-    calculate nearest-higher and separation   &  70.54 $\pm$  4.27 ms       &   4.90 $\pm$  0.40 ms (14.41x)        &   0.21 ms (340.26x)       \\
-    decide seeds/outliers, register followers &  12.53 $\pm$  0.99 ms       &  35.00 $\pm$  2.19 ms ( 0.36x)        &   0.09 ms (141.81x)       \\
-    expand clusters                           &   2.47 $\pm$  0.09 ms       &   0.62 $\pm$  0.11 ms ( 3.95x)        &   0.08 ms ( 30.31x)       \\ \hline
+    CLUE Step                                 & CPU [1T] (baseline)         & CPU TBB [10T]                         & GPU                       \\ \hline
+    build fixed-grid spatial index            &  17.82 $\pm$  1.88 ms       &  37.75 $\pm$  4.77 ms ( 0.47x)        &   0.10 ms (184.57x)       \\
+    calculate local density                   &  56.15 $\pm$  4.39 ms       &  11.11 $\pm$  1.42 ms ( 5.05x)        &   0.14 ms (415.21x)       \\
+    calculate nearest-higher and separation   &  71.16 $\pm$  7.17 ms       &  13.11 $\pm$  1.42 ms ( 5.43x)        &   0.21 ms (343.11x)       \\
+    decide seeds/outliers, register followers &  12.63 $\pm$  1.68 ms       &  32.54 $\pm$  2.13 ms ( 0.39x)        &   0.09 ms (142.97x)       \\
+    expand clusters                           &   2.47 $\pm$  0.34 ms       &   1.19 $\pm$  0.05 ms ( 2.07x)        &   0.08 ms ( 30.39x)       \\ \hline
     cuda memcpy, memset                       & --                          & --                                    &   0.51 ms,   0.10 ms      \\ 
-    other                                     &  11.09 $\pm$  1.09 ms       &  28.77 $\pm$ 13.75 ms                 &   1.61 ms                 \\ \hline
-    \textbf{TOTAL} ( 3000 points per layer)   & \textbf{170.08 $\pm$ 10.02 ms} & \textbf{118.54 $\pm$ 16.84 ms ( 1.43x)} & \textbf{  2.83 $\pm$  0.22 ms ( 60.16x)}  \\
+    other                                     &  11.27 $\pm$  1.78 ms       &  24.48 $\pm$  4.21 ms                 &   0.97 ms                 \\ \hline
+    \textbf{TOTAL} ( 3000 points per layer)   & \textbf{171.50 $\pm$ 15.29 ms} & \textbf{120.18 $\pm$ 11.08 ms ( 1.43x)} & \textbf{  2.19 $\pm$  0.17 ms ( 78.21x)}  \\
     \hline
     \multicolumn{4}{c}{} 
     \end{tabular}
@@ -55,15 +55,15 @@
     % 4000
     \begin{tabular}{l|c|c|c}
     \hline
-    CLUE Step                                 & CPU [1T] (baseline)         & CPU TBB [40T]                         & GPU                       \\ \hline
-    build fixed-grid spatial index            &  23.38 $\pm$  1.23 ms       &  59.64 $\pm$  6.42 ms ( 0.39x)        &   0.13 ms (183.09x)       \\
-    calculate local density                   &  80.36 $\pm$  2.39 ms       &   5.23 $\pm$  0.84 ms (15.36x)        &   0.20 ms (397.42x)       \\
-    calculate nearest-higher and separation   & 108.10 $\pm$  3.04 ms       &   6.93 $\pm$  0.41 ms (15.59x)        &   0.30 ms (356.24x)       \\
-    decide seeds/outliers, register followers &  17.17 $\pm$  1.36 ms       &  47.98 $\pm$  2.51 ms ( 0.36x)        &   0.12 ms (138.78x)       \\
-    expand clusters                           &   4.06 $\pm$  0.12 ms       &   0.90 $\pm$  0.19 ms ( 4.49x)        &   0.12 ms ( 32.98x)       \\ \hline
-    cuda memcpy, memset                       & --                          & --                                    &   0.84 ms,   0.10 ms      \\ 
-    other                                     &  13.28 $\pm$  1.35 ms       &  31.64 $\pm$ 14.86 ms                 &   1.87 ms                 \\ \hline
-    \textbf{TOTAL} ( 4000 points per layer)   & \textbf{246.35 $\pm$  8.47 ms} & \textbf{152.33 $\pm$ 18.96 ms ( 1.62x)} & \textbf{  3.69 $\pm$  0.35 ms ( 66.83x)}  \\
+    CLUE Step                                 & CPU [1T] (baseline)         & CPU TBB [10T]                         & GPU                       \\ \hline
+    build fixed-grid spatial index            &  24.92 $\pm$  3.37 ms       &  55.06 $\pm$  2.77 ms ( 0.45x)        &   0.13 ms (195.20x)       \\
+    calculate local density                   &  83.62 $\pm$  9.08 ms       &  16.10 $\pm$  0.67 ms ( 5.19x)        &   0.20 ms (413.61x)       \\
+    calculate nearest-higher and separation   & 111.91 $\pm$ 11.02 ms       &  19.50 $\pm$  0.62 ms ( 5.74x)        &   0.30 ms (369.89x)       \\
+    decide seeds/outliers, register followers &  18.50 $\pm$  2.46 ms       &  44.05 $\pm$  1.74 ms ( 0.42x)        &   0.12 ms (149.11x)       \\
+    expand clusters                           &   4.97 $\pm$  0.72 ms       &   1.90 $\pm$  0.10 ms ( 2.61x)        &   0.12 ms ( 40.35x)       \\ \hline
+    cuda memcpy, memset                       & --                          & --                                    &   0.67 ms,   0.10 ms      \\ 
+    other                                     &  14.49 $\pm$  3.37 ms       &  27.48 $\pm$  4.34 ms                 &   1.63 ms                 \\ \hline
+    \textbf{TOTAL} ( 4000 points per layer)   & \textbf{258.41 $\pm$ 26.14 ms} & \textbf{164.08 $\pm$  7.61 ms ( 1.57x)} & \textbf{  3.28 $\pm$  0.14 ms ( 78.88x)}  \\
     \hline
     \multicolumn{4}{c}{} 
     \end{tabular}
@@ -73,15 +73,15 @@
     % 5000
     \begin{tabular}{l|c|c|c}
     \hline
-    CLUE Step                                 & CPU [1T] (baseline)         & CPU TBB [40T]                         & GPU                       \\ \hline
-    build fixed-grid spatial index            &  30.48 $\pm$  2.64 ms       &  71.69 $\pm$  7.79 ms ( 0.43x)        &   0.16 ms (191.80x)       \\
-    calculate local density                   & 102.91 $\pm$  7.94 ms       &   6.41 $\pm$  1.84 ms (16.05x)        &   0.25 ms (413.71x)       \\
-    calculate nearest-higher and separation   & 139.61 $\pm$  8.35 ms       &   8.46 $\pm$  1.24 ms (16.50x)        &   0.40 ms (350.97x)       \\
-    decide seeds/outliers, register followers &  21.97 $\pm$  2.08 ms       &  54.92 $\pm$  2.94 ms ( 0.40x)        &   0.15 ms (143.31x)       \\
-    expand clusters                           &   5.06 $\pm$  0.67 ms       &   1.23 $\pm$  0.44 ms ( 4.12x)        &   0.14 ms ( 35.38x)       \\ \hline
-    cuda memcpy, memset                       & --                          & --                                    &   1.38 ms,   0.09 ms      \\ 
-    other                                     &  16.17 $\pm$  1.91 ms       &  34.89 $\pm$ 19.84 ms                 &   1.73 ms                 \\ \hline
-    \textbf{TOTAL} ( 5000 points per layer)   & \textbf{316.20 $\pm$ 21.33 ms} & \textbf{177.61 $\pm$ 23.03 ms ( 1.78x)} & \textbf{  4.30 $\pm$  0.38 ms ( 73.53x)}  \\
+    CLUE Step                                 & CPU [1T] (baseline)         & CPU TBB [10T]                         & GPU                       \\ \hline
+    build fixed-grid spatial index            &  30.44 $\pm$  2.04 ms       &  63.89 $\pm$  5.23 ms ( 0.48x)        &   0.16 ms (191.80x)       \\
+    calculate local density                   & 102.24 $\pm$  4.98 ms       &  18.78 $\pm$  0.79 ms ( 5.44x)        &   0.25 ms (411.02x)       \\
+    calculate nearest-higher and separation   & 139.52 $\pm$  9.76 ms       &  22.96 $\pm$  0.71 ms ( 6.08x)        &   0.41 ms (342.51x)       \\
+    decide seeds/outliers, register followers &  23.19 $\pm$  2.01 ms       &  51.20 $\pm$  3.66 ms ( 0.45x)        &   0.15 ms (150.13x)       \\
+    expand clusters                           &   5.89 $\pm$  0.45 ms       &   2.28 $\pm$  0.11 ms ( 2.58x)        &   0.14 ms ( 41.11x)       \\ \hline
+    cuda memcpy, memset                       & --                          & --                                    &   1.31 ms,   0.09 ms      \\ 
+    other                                     &  16.09 $\pm$  1.77 ms       &  28.63 $\pm$  3.42 ms                 &   0.72 ms                 \\ \hline
+    \textbf{TOTAL} ( 5000 points per layer)   & \textbf{317.37 $\pm$ 18.46 ms} & \textbf{187.74 $\pm$ 10.64 ms ( 1.69x)} & \textbf{  3.24 $\pm$  0.20 ms ( 98.09x)}  \\
     \hline
     \multicolumn{4}{c}{} 
     \end{tabular}
@@ -91,15 +91,15 @@
     % 6000
     \begin{tabular}{l|c|c|c}
     \hline
-    CLUE Step                                 & CPU [1T] (baseline)         & CPU TBB [40T]                         & GPU                       \\ \hline
-    build fixed-grid spatial index            &  36.46 $\pm$  3.96 ms       &  82.42 $\pm$  6.85 ms ( 0.44x)        &   0.19 ms (196.14x)       \\
-    calculate local density                   & 120.77 $\pm$  6.89 ms       &   7.09 $\pm$  0.92 ms (17.03x)        &   0.28 ms (431.97x)       \\
-    calculate nearest-higher and separation   & 166.11 $\pm$  9.06 ms       &   9.77 $\pm$  1.26 ms (17.01x)        &   0.47 ms (352.28x)       \\
-    decide seeds/outliers, register followers &  26.18 $\pm$  2.17 ms       &  63.22 $\pm$  3.35 ms ( 0.41x)        &   0.19 ms (138.89x)       \\
-    expand clusters                           &   6.67 $\pm$  0.94 ms       &   1.38 $\pm$  0.23 ms ( 4.83x)        &   0.15 ms ( 44.96x)       \\ \hline
-    cuda memcpy, memset                       & --                          & --                                    &   1.37 ms,   0.10 ms      \\ 
-    other                                     &  18.94 $\pm$  1.95 ms       &  37.02 $\pm$ 18.51 ms                 &   2.07 ms                 \\ \hline
-    \textbf{TOTAL} ( 6000 points per layer)   & \textbf{375.12 $\pm$ 21.18 ms} & \textbf{200.89 $\pm$ 20.48 ms ( 1.87x)} & \textbf{  4.82 $\pm$  0.42 ms ( 77.88x)}  \\
+    CLUE Step                                 & CPU [1T] (baseline)         & CPU TBB [10T]                         & GPU                       \\ \hline
+    build fixed-grid spatial index            &  35.76 $\pm$  1.87 ms       &  75.72 $\pm$  3.02 ms ( 0.47x)        &   0.19 ms (192.49x)       \\
+    calculate local density                   & 119.51 $\pm$  3.10 ms       &  21.33 $\pm$  0.68 ms ( 5.60x)        &   0.28 ms (426.93x)       \\
+    calculate nearest-higher and separation   & 164.32 $\pm$  2.80 ms       &  26.29 $\pm$  0.65 ms ( 6.25x)        &   0.46 ms (354.68x)       \\
+    decide seeds/outliers, register followers &  25.90 $\pm$  1.13 ms       &  61.15 $\pm$  1.32 ms ( 0.42x)        &   0.19 ms (137.26x)       \\
+    expand clusters                           &   6.25 $\pm$  0.18 ms       &   2.69 $\pm$  0.10 ms ( 2.32x)        &   0.15 ms ( 42.16x)       \\ \hline
+    cuda memcpy, memset                       & --                          & --                                    &   1.73 ms,   0.09 ms      \\ 
+    other                                     &  18.50 $\pm$  1.30 ms       &  32.71 $\pm$  4.59 ms                 &   0.44 ms                 \\ \hline
+    \textbf{TOTAL} ( 6000 points per layer)   & \textbf{370.24 $\pm$  8.84 ms} & \textbf{219.89 $\pm$  7.16 ms ( 1.68x)} & \textbf{  3.52 $\pm$  0.22 ms (105.19x)}  \\
     \hline
     \multicolumn{4}{c}{} 
     \end{tabular}
@@ -109,15 +109,15 @@
     % 7000
     \begin{tabular}{l|c|c|c}
     \hline
-    CLUE Step                                 & CPU [1T] (baseline)         & CPU TBB [40T]                         & GPU                       \\ \hline
-    build fixed-grid spatial index            &  42.21 $\pm$  1.22 ms       &  93.66 $\pm$  7.14 ms ( 0.45x)        &   0.21 ms (200.55x)       \\
-    calculate local density                   & 148.29 $\pm$  3.89 ms       &   8.42 $\pm$  1.58 ms (17.60x)        &   0.35 ms (425.43x)       \\
-    calculate nearest-higher and separation   & 213.31 $\pm$ 10.21 ms       &  11.64 $\pm$  0.94 ms (18.33x)        &   0.58 ms (365.25x)       \\
-    decide seeds/outliers, register followers &  35.74 $\pm$  2.01 ms       &  74.13 $\pm$  3.62 ms ( 0.48x)        &   0.23 ms (158.62x)       \\
-    expand clusters                           &  10.25 $\pm$  0.17 ms       &   1.72 $\pm$  0.36 ms ( 5.97x)        &   0.20 ms ( 50.44x)       \\ \hline
-    cuda memcpy, memset                       & --                          & --                                    &   2.24 ms,   0.11 ms      \\ 
-    other                                     &  20.64 $\pm$  0.96 ms       &  38.98 $\pm$ 19.64 ms                 &   0.68 ms                 \\ \hline
-    \textbf{TOTAL} ( 7000 points per layer)   & \textbf{470.43 $\pm$ 14.03 ms} & \textbf{228.54 $\pm$ 22.18 ms ( 2.06x)} & \textbf{  4.60 $\pm$  0.56 ms (102.23x)}  \\
+    CLUE Step                                 & CPU [1T] (baseline)         & CPU TBB [10T]                         & GPU                       \\ \hline
+    build fixed-grid spatial index            &  42.27 $\pm$  1.83 ms       &  87.13 $\pm$  3.34 ms ( 0.49x)        &   0.21 ms (201.17x)       \\
+    calculate local density                   & 147.56 $\pm$  2.92 ms       &  24.76 $\pm$  0.75 ms ( 5.96x)        &   0.35 ms (423.74x)       \\
+    calculate nearest-higher and separation   & 211.28 $\pm$  3.12 ms       &  31.21 $\pm$  0.65 ms ( 6.77x)        &   0.58 ms (366.26x)       \\
+    decide seeds/outliers, register followers &  35.20 $\pm$  1.69 ms       &  73.20 $\pm$  2.03 ms ( 0.48x)        &   0.22 ms (156.60x)       \\
+    expand clusters                           &  10.24 $\pm$  0.29 ms       &   3.69 $\pm$  0.13 ms ( 2.78x)        &   0.20 ms ( 50.39x)       \\ \hline
+    cuda memcpy, memset                       & --                          & --                                    &   2.19 ms,   0.10 ms      \\ 
+    other                                     &  20.72 $\pm$  1.35 ms       &  34.20 $\pm$  3.31 ms                 &   1.55 ms                 \\ \hline
+    \textbf{TOTAL} ( 7000 points per layer)   & \textbf{467.27 $\pm$  7.95 ms} & \textbf{254.19 $\pm$  6.65 ms ( 1.84x)} & \textbf{  5.41 $\pm$  2.12 ms ( 86.44x)}  \\
     \hline
     \multicolumn{4}{c}{} 
     \end{tabular}
@@ -127,15 +127,15 @@
     % 8000
     \begin{tabular}{l|c|c|c}
     \hline
-    CLUE Step                                 & CPU [1T] (baseline)         & CPU TBB [40T]                         & GPU                       \\ \hline
-    build fixed-grid spatial index            &  48.78 $\pm$  2.96 ms       & 104.25 $\pm$  6.83 ms ( 0.47x)        &   0.23 ms (210.07x)       \\
-    calculate local density                   & 175.16 $\pm$  8.22 ms       &   9.45 $\pm$  1.08 ms (18.53x)        &   0.39 ms (447.28x)       \\
-    calculate nearest-higher and separation   & 251.83 $\pm$ 12.85 ms       &  13.25 $\pm$  1.90 ms (19.00x)        &   0.71 ms (355.77x)       \\
-    decide seeds/outliers, register followers &  42.52 $\pm$  4.13 ms       &  82.91 $\pm$  3.59 ms ( 0.51x)        &   0.26 ms (161.85x)       \\
-    expand clusters                           &  12.20 $\pm$  1.27 ms       &   2.11 $\pm$  0.46 ms ( 5.79x)        &   0.23 ms ( 54.08x)       \\ \hline
-    cuda memcpy, memset                       & --                          & --                                    &   1.91 ms,   0.11 ms      \\ 
-    other                                     &  23.93 $\pm$  2.20 ms       &  41.99 $\pm$ 18.86 ms                 &   2.43 ms                 \\ \hline
-    \textbf{TOTAL} ( 8000 points per layer)   & \textbf{554.41 $\pm$ 25.86 ms} & \textbf{253.97 $\pm$ 20.61 ms ( 2.18x)} & \textbf{  6.27 $\pm$  0.36 ms ( 88.41x)}  \\
+    CLUE Step                                 & CPU [1T] (baseline)         & CPU TBB [10T]                         & GPU                       \\ \hline
+    build fixed-grid spatial index            &  47.62 $\pm$  1.75 ms       &  97.24 $\pm$  5.76 ms ( 0.49x)        &   0.23 ms (204.46x)       \\
+    calculate local density                   & 172.60 $\pm$  2.42 ms       &  27.69 $\pm$  0.99 ms ( 6.23x)        &   0.39 ms (440.43x)       \\
+    calculate nearest-higher and separation   & 248.12 $\pm$  2.24 ms       &  35.13 $\pm$  0.99 ms ( 7.06x)        &   0.70 ms (352.76x)       \\
+    decide seeds/outliers, register followers &  40.82 $\pm$  0.81 ms       &  82.35 $\pm$  4.08 ms ( 0.50x)        &   0.26 ms (155.20x)       \\
+    expand clusters                           &  11.65 $\pm$  0.48 ms       &   4.29 $\pm$  0.19 ms ( 2.72x)        &   0.23 ms ( 51.68x)       \\ \hline
+    cuda memcpy, memset                       & --                          & --                                    &   2.85 ms,   0.09 ms      \\ 
+    other                                     &  23.45 $\pm$  1.44 ms       &  36.38 $\pm$  5.38 ms                 &   0.11 ms                 \\ \hline
+    \textbf{TOTAL} ( 8000 points per layer)   & \textbf{544.27 $\pm$  5.99 ms} & \textbf{283.09 $\pm$ 11.45 ms ( 1.92x)} & \textbf{  4.86 $\pm$  0.43 ms (111.94x)}  \\
     \hline
     \multicolumn{4}{c}{} 
     \end{tabular}
@@ -145,15 +145,15 @@
     % 9000
     \begin{tabular}{l|c|c|c}
     \hline
-    CLUE Step                                 & CPU [1T] (baseline)         & CPU TBB [40T]                         & GPU                       \\ \hline
-    build fixed-grid spatial index            &  55.57 $\pm$  4.96 ms       & 117.50 $\pm$  5.89 ms ( 0.47x)        &   0.25 ms (218.00x)       \\
-    calculate local density                   & 200.27 $\pm$ 10.12 ms       &  10.61 $\pm$  3.21 ms (18.87x)        &   0.45 ms (444.00x)       \\
-    calculate nearest-higher and separation   & 296.14 $\pm$ 17.17 ms       &  14.75 $\pm$  0.74 ms (20.07x)        &   0.80 ms (369.34x)       \\
-    decide seeds/outliers, register followers &  49.28 $\pm$  4.08 ms       &  95.14 $\pm$  3.71 ms ( 0.52x)        &   0.30 ms (163.55x)       \\
-    expand clusters                           &  15.54 $\pm$  1.96 ms       &   2.42 $\pm$  0.47 ms ( 6.43x)        &   0.30 ms ( 52.36x)       \\ \hline
-    cuda memcpy, memset                       & --                          & --                                    &   2.58 ms,   0.10 ms      \\ 
-    other                                     &  26.98 $\pm$  2.77 ms       &  46.40 $\pm$ 27.96 ms                 &   2.08 ms                 \\ \hline
-    \textbf{TOTAL} ( 9000 points per layer)   & \textbf{643.76 $\pm$ 33.11 ms} & \textbf{286.82 $\pm$ 30.08 ms ( 2.24x)} & \textbf{  6.86 $\pm$  0.36 ms ( 93.78x)}  \\
+    CLUE Step                                 & CPU [1T] (baseline)         & CPU TBB [10T]                         & GPU                       \\ \hline
+    build fixed-grid spatial index            &  53.36 $\pm$  2.02 ms       & 104.46 $\pm$  7.57 ms ( 0.51x)        &   0.26 ms (208.86x)       \\
+    calculate local density                   & 196.28 $\pm$  2.15 ms       &  30.25 $\pm$  1.03 ms ( 6.49x)        &   0.45 ms (435.32x)       \\
+    calculate nearest-higher and separation   & 290.55 $\pm$  3.50 ms       &  39.61 $\pm$  0.97 ms ( 7.34x)        &   0.80 ms (361.26x)       \\
+    decide seeds/outliers, register followers &  47.10 $\pm$  0.92 ms       &  90.56 $\pm$  7.19 ms ( 0.52x)        &   0.30 ms (156.05x)       \\
+    expand clusters                           &  14.33 $\pm$  0.13 ms       &   5.03 $\pm$  0.32 ms ( 2.85x)        &   0.30 ms ( 48.26x)       \\ \hline
+    cuda memcpy, memset                       & --                          & --                                    &   2.95 ms,   0.10 ms      \\ 
+    other                                     &  25.80 $\pm$  0.88 ms       &  35.64 $\pm$  4.18 ms                 &   0.51 ms                 \\ \hline
+    \textbf{TOTAL} ( 9000 points per layer)   & \textbf{627.43 $\pm$  6.88 ms} & \textbf{305.54 $\pm$ 15.13 ms ( 2.05x)} & \textbf{  5.66 $\pm$  0.35 ms (110.84x)}  \\
     \hline
     \multicolumn{4}{c}{} 
     \end{tabular}
@@ -163,15 +163,15 @@
     % 10000
     \begin{tabular}{l|c|c|c}
     \hline
-    CLUE Step                                 & CPU [1T] (baseline)         & CPU TBB [40T]                         & GPU                       \\ \hline
-    build fixed-grid spatial index            &  60.58 $\pm$  3.67 ms       & 126.96 $\pm$  7.80 ms ( 0.48x)        &   0.28 ms (213.44x)       \\
-    calculate local density                   & 221.56 $\pm$  9.10 ms       &  11.27 $\pm$  0.99 ms (19.66x)        &   0.51 ms (437.42x)       \\
-    calculate nearest-higher and separation   & 330.96 $\pm$ 14.17 ms       &  16.36 $\pm$  2.19 ms (20.23x)        &   0.90 ms (369.68x)       \\
-    decide seeds/outliers, register followers &  56.31 $\pm$  4.04 ms       & 107.62 $\pm$  3.77 ms ( 0.52x)        &   0.33 ms (169.21x)       \\
-    expand clusters                           &  17.70 $\pm$  1.99 ms       &   2.71 $\pm$  0.66 ms ( 6.52x)        &   0.35 ms ( 50.71x)       \\ \hline
-    cuda memcpy, memset                       & --                          & --                                    &   2.76 ms,   0.10 ms      \\ 
-    other                                     &  29.49 $\pm$  2.32 ms       &  47.86 $\pm$ 28.44 ms                 &   1.09 ms                 \\ \hline
-    \textbf{TOTAL} (10000 points per layer)   & \textbf{716.59 $\pm$ 28.53 ms} & \textbf{312.79 $\pm$ 30.38 ms ( 2.29x)} & \textbf{  6.32 $\pm$  0.65 ms (113.36x)}  \\
+    CLUE Step                                 & CPU [1T] (baseline)         & CPU TBB [10T]                         & GPU                       \\ \hline
+    build fixed-grid spatial index            &  59.27 $\pm$  1.60 ms       & 117.71 $\pm$  6.43 ms ( 0.50x)        &   0.28 ms (208.63x)       \\
+    calculate local density                   & 218.42 $\pm$  2.47 ms       &  33.69 $\pm$  2.61 ms ( 6.48x)        &   0.51 ms (430.57x)       \\
+    calculate nearest-higher and separation   & 326.89 $\pm$  2.86 ms       &  45.47 $\pm$  2.54 ms ( 7.19x)        &   0.89 ms (368.54x)       \\
+    decide seeds/outliers, register followers &  54.43 $\pm$  2.54 ms       & 109.43 $\pm$  7.70 ms ( 0.50x)        &   0.34 ms (162.38x)       \\
+    expand clusters                           &  17.37 $\pm$  1.46 ms       &   6.09 $\pm$  1.35 ms ( 2.86x)        &   0.35 ms ( 49.74x)       \\ \hline
+    cuda memcpy, memset                       & --                          & --                                    &   2.87 ms,   0.10 ms      \\ 
+    other                                     &  29.11 $\pm$  1.66 ms       &  44.86 $\pm$ 15.73 ms                 &   1.30 ms                 \\ \hline
+    \textbf{TOTAL} (10000 points per layer)   & \textbf{705.49 $\pm$  7.93 ms} & \textbf{357.24 $\pm$ 19.68 ms ( 1.97x)} & \textbf{  6.63 $\pm$  0.63 ms (106.42x)}  \\
     \hline
     \multicolumn{4}{c}{} 
     \end{tabular}
