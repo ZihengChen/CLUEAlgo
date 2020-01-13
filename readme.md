@@ -1,8 +1,8 @@
 # Standalone CLUE Algorithm on GPU and CPU
 
-Z.Chen[1], A. Di Pilato[2,3], F. Pantaleo[4], M. Rovere[4]
+Z.Chen[1], A. Di Pilato[2,3], F. Pantaleo[4], M. Rovere[4], C. Seez[5]
 
-*[1] Northwestern University, [2]University of Bari, [3]INFN, [4] CERN*
+*[1] Northwestern University, [2]University of Bari, [3]INFN, [4] CERN, [5]Imperial College London*
 
 ## 1. Setup
 
